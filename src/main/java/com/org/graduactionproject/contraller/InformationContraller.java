@@ -4,13 +4,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.org.graduactionproject.domain.Achievement;
 import com.org.graduactionproject.service.IAchievementService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -20,10 +22,18 @@ public class InformationContraller {
     @Qualifier("achievementService")
     private IAchievementService achievementService;
 
-    @RequestMapping("/getInformationWithPage")
-    public Page getInformationWithPage(String data){
-        int page =1;
-        int size = 5;
+    @RequestMapping(value = "/getInformationWithPage",method = RequestMethod.POST)
+    public Page getInformationWithPage(@RequestBody String data){
+
+
+        System.out.println(data);
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        int page = jsonObject.getInt("currentPage");
+
+        int size = jsonObject.getInt("pageSize");
+
+//        int page = Integer.parseInt(map.get("currentPage"));
+//        int size = Integer.parseInt(map.get("pageSize"));
         //分页并查询
         Page<Achievement> pageInfo = PageHelper.startPage(page, size);
 //        List<User> users = userRepository.listUser();
