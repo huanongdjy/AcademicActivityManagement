@@ -1,21 +1,21 @@
 package com.org.graduactionproject.domain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Essay {
     private int essay_id;
     private String theme;
     private String summary;
-    private Date essay_time;
+    private Timestamp essay_time;
     private String location;
     private String content;
-    private String precautions;
-    private String fund;
-    private String oranizer;
-    private int planned_attendance;
-    private int actual_attendance;
-    private byte[] photo;
-    private String outcome;
+    private String precautions;//注意事项
+    private String fund;//资金
+    private String oranizer;//组织者
+    private int planned_attendance;//计划出席
+    private int actual_attendance;//实际出席
+    private byte[] photo;//照片
+    private String outcome;//结论、总结
 
     public int getEssay_id() {
         return essay_id;
@@ -41,11 +41,11 @@ public class Essay {
         this.summary = summary;
     }
 
-    public Date getEssay_time() {
+    public Timestamp getEssay_time() {
         return essay_time;
     }
 
-    public void setEssay_time(Date essay_time) {
+    public void setEssay_time(Timestamp essay_time) {
         this.essay_time = essay_time;
     }
 
