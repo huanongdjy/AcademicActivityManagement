@@ -17,7 +17,6 @@ import java.util.Map;
 
 
 @RestController
-@Controller
 public class InformationContraller {
     @Autowired
     @Qualifier("achievementService")
