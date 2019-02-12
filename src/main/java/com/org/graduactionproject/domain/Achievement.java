@@ -4,27 +4,29 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class Achievement {
-    private int achievement_id;
-    private String achievement_name;
+    private int id;
+    private String title;
     private String member;
     private String content;
     private Timestamp acquisitiondate;
-    private Timestamp pubdate;
+    private Timestamp time;
+    private int index;
+    private String read;
 
-    public int getAchievement_id() {
-        return achievement_id;
+    public int getId() {
+        return id;
     }
 
-    public void setAchievement_id(int achievement_id) {
-        this.achievement_id = achievement_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAchievement_name() {
-        return achievement_name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAchievement_name(String achievement_name) {
-        this.achievement_name = achievement_name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMember() {
@@ -51,11 +53,27 @@ public class Achievement {
         this.acquisitiondate = acquisitiondate;
     }
 
-    public Timestamp getPubdate() {
-        return pubdate;
+    public Timestamp getTime() {
+        return time;
     }
 
-    public void setPubdate(Timestamp pubdate) {
-        this.pubdate = pubdate;
+    public void setTime(Timestamp time) {
+        this.time = time;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getRead() {
+        return read;
+    }
+
+    public void setRead(String read) {
+        this.read = read;
     }
 }

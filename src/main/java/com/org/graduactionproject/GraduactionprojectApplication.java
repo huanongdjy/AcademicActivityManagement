@@ -15,17 +15,5 @@ public class GraduactionprojectApplication {
     public static void main(String[] args) {
         SpringApplication.run(GraduactionprojectApplication.class, args);
     }
-//    private CorsConfiguration buildConfig(){
-//        CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.addAllowedHeader("*");
-//        corsConfiguration.addAllowedOrigin("*");
-//        corsConfiguration.addAllowedMethod("*");
-//        return corsConfiguration;
-//    }
-//    public CorsFilter corsFilter(){
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", buildConfig());
-//        return new CorsFilter(source);
-//    }
 }
 

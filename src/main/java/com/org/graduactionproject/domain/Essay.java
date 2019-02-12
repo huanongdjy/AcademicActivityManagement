@@ -3,10 +3,11 @@ package com.org.graduactionproject.domain;
 import java.sql.Timestamp;
 
 public class Essay {
-    private int essay_id;
+    private int id;
+    private String title;
     private String theme;
     private String summary;
-    private Timestamp essay_time;
+    private Timestamp time;
     private String location;
     private String content;
     private String precautions;//注意事项
@@ -16,13 +17,22 @@ public class Essay {
     private int actual_attendance;//实际出席
     private byte[] photo;//照片
     private String outcome;//结论、总结
+    private int index;
 
-    public int getEssay_id() {
-        return essay_id;
+    public int getId() {
+        return id;
     }
 
-    public void setEssay_id(int essay_id) {
-        this.essay_id = essay_id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTheme() {
@@ -41,12 +51,12 @@ public class Essay {
         this.summary = summary;
     }
 
-    public Timestamp getEssay_time() {
-        return essay_time;
+    public Timestamp getTime() {
+        return time;
     }
 
-    public void setEssay_time(Timestamp essay_time) {
-        this.essay_time = essay_time;
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
     public String getLocation() {
@@ -119,5 +129,13 @@ public class Essay {
 
     public void setOutcome(String outcome) {
         this.outcome = outcome;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

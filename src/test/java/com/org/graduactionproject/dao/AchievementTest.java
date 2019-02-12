@@ -23,13 +23,13 @@ public class AchievementTest {
     public void insertSysRoleTest() {
         try {
             Achievement achievement = new Achievement();
-            achievement.setAchievement_name("测试");
+            achievement.setTitle("测试");
             achievement.setContent("测试内容");
             achievement.setMember("教授|教师");
             // 新增用户 ,返回受影响的行数
             int result = achievementMapper.addAchievement(achievement);
             System.out.println(result);
-            System.out.println("achievement 的 id" + achievement.getAchievement_id());
+            System.out.println("achievement 的 id" + achievement.getId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
