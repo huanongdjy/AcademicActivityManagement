@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class SearchContraller {
@@ -23,16 +26,24 @@ public class SearchContraller {
     private IEssayService essayService;
 
     @RequestMapping("/search")
-    public List search(@RequestBody String data){
+    public List<Map<String,Object>> search(@RequestBody String data){
+        List<Map<String,Object>> list = new ArrayList<>();
+        List<Map<String,Object>> result = null;
         JSONObject jsonObject = JSONObject.fromObject(data);
 
         String type = jsonObject.getString("type");
         String title = jsonObject.getString("title");
         if("activity".equals(type)){
-            return essayService.findEssayByName(title);
+            result = essayService.findEssayByName(title);
         }else if("achievement".equals(type)){
             return null;
         }
-        return null;
+        if(result != null){
+            Map<String,Object> map = new HashMap<>();
+            map.put("resultCode", "200");
+            list.add(map);
+            list.addAll(result);
+        }
+        return list;
     }
 }

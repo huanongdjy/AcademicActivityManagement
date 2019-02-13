@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("essayService")
 public class EssayServiceImpl implements IEssayService {
     @Autowired
     EssayMapper essayMapper;
 
-    public List findEssayByName(String title){
+    public List<Map<String,Object>> findEssayByName(String title){
         return essayMapper.findEssayByName(title);
     }
     public int addAchievement(Essay essay){
