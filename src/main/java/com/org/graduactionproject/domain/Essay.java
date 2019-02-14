@@ -18,6 +18,8 @@ public class Essay {
     private byte[] photo;//照片
     private String outcome;//结论、总结
     private int index;
+    private boolean toshow;
+    private int type_id;
 
     public int getId() {
         return id;
@@ -137,5 +139,21 @@ public class Essay {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public boolean isToshow() {
+        return toshow;
+    }
+
+    public void setToshow(boolean toshow) {
+        this.toshow = toshow;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
     }
 }

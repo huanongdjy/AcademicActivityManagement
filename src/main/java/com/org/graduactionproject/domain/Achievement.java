@@ -12,6 +12,8 @@ public class Achievement {
     private Timestamp time;
     private int index;
     private String read;
+    private Boolean toshow;
+    private int type_id;
 
     public int getId() {
         return id;
@@ -75,5 +77,21 @@ public class Achievement {
 
     public void setRead(String read) {
         this.read = read;
+    }
+
+    public Boolean getToshow() {
+        return toshow;
+    }
+
+    public void setToshow(Boolean toshow) {
+        this.toshow = toshow;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
     }
 }
