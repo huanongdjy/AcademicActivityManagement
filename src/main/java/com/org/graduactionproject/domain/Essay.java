@@ -7,7 +7,9 @@ public class Essay {
     private String title;
     private String theme;
     private String summary;
+    private String author;
     private Timestamp time;
+    private Timestamp hold_time;
     private String location;
     private String content;
     private String precautions;//注意事项
@@ -18,8 +20,9 @@ public class Essay {
     private byte[] photo;//照片
     private String outcome;//结论、总结
     private int index;
-    private boolean toshow;
     private int type_id;
+    private int read_num;
+    private boolean toshow;
 
     public int getId() {
         return id;
@@ -53,12 +56,28 @@ public class Essay {
         this.summary = summary;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public Timestamp getTime() {
         return time;
     }
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public Timestamp getHold_time() {
+        return hold_time;
+    }
+
+    public void setHold_time(Timestamp hold_time) {
+        this.hold_time = hold_time;
     }
 
     public String getLocation() {
@@ -141,19 +160,27 @@ public class Essay {
         this.index = index;
     }
 
-    public boolean isToshow() {
-        return toshow;
-    }
-
-    public void setToshow(boolean toshow) {
-        this.toshow = toshow;
-    }
-
     public int getType_id() {
         return type_id;
     }
 
     public void setType_id(int type_id) {
         this.type_id = type_id;
+    }
+
+    public int getRead_num() {
+        return read_num;
+    }
+
+    public void setRead_num(int read_num) {
+        this.read_num = read_num;
+    }
+
+    public boolean isToshow() {
+        return toshow;
+    }
+
+    public void setToshow(boolean toshow) {
+        this.toshow = toshow;
     }
 }

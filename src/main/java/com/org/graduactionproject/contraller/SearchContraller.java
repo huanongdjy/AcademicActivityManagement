@@ -34,9 +34,9 @@ public class SearchContraller {
         String type = jsonObject.getString("type");
         String title = jsonObject.getString("title");
         if("activity".equals(type)){
-            result = essayService.findEssayByName(title);
+            result = essayService.findEssayByTitle(title);
         }else if("achievement".equals(type)){
-            return null;
+            result = achievementService.findAchievementByTitle(title);
         }
         if(result != null){
             Map<String,Object> map = new HashMap<>();

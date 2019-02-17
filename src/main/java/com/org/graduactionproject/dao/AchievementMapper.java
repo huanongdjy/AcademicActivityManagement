@@ -1,15 +1,19 @@
 package com.org.graduactionproject.dao;
 
 import com.org.graduactionproject.domain.Achievement;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AchievementMapper {
     @Select("select * from achievement where achievement_id = #{achievement_id}")
+//    @Results({
+//            @Result(property = "read",
+//                    column = "read_id",
+//                    javaType = Read.class,
+//                    jdbcType = JdbcType.INTEGER,
+//                    one = @One(select ="com.org.graduactionproject.dao.EssayReadMapper.findReadByRead_id"))})
     Achievement findAchievementById(@Param("achievement_id")int achievement_id);
 
     @Insert("insert into achievement(title, member, content, acquisitiondate, time, read, index) values(#{achievement_name}, #{member}, #{content}," +
@@ -17,6 +21,25 @@ public interface AchievementMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addAchievement(Achievement achievement);
 
-    @Select("select * from achievement order by acquisitiondate")//根据获得成功的日期排序
+    @Select("select * from achievement order by acquisitiondate")//根据获得成果的日期排序
+//    @Results({
+//            @Result(property = "read",
+//                    column = "read_id",
+//                    javaType = Read.class,
+//                    jdbcType = JdbcType.INTEGER,
+//                    one = @One(select ="com.org.graduactionproject.dao.EssayReadMapper.findReadByRead_id", fetchType=FetchType.EAGER))})
     List<Achievement> findAll();
+
+    @Select("select * from achievement where title like CONCAT('%', #{title},'%')")
+//    @Results({
+//            @Result(property = "read",
+//                    column = "read_id",
+//                    javaType = Read.class,
+//                    jdbcType = JdbcType.INTEGER,
+//                    one = @One(select ="com.org.graduactionproject.dao.EssayReadMapper.findReadByRead_id", fetchType=FetchType.EAGER))})
+    List<Map<String,Object>> findAchievementByTitle(@Param("title")String title);
+
+
+    @Update("update achievement set read_num = read_num + 1 where id=#{id}")
+    int updateRead_num(@Param("id") int id);
 }

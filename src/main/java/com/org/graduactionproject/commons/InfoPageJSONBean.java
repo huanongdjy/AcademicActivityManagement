@@ -1,16 +1,17 @@
 package com.org.graduactionproject.commons;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 public class InfoPageJSONBean {
-    private Page page;
+    private PageInfo page;
     private String resultCode;
 
-    public Page getPage() {
+    public PageInfo getPage() {
         return page;
     }
 
-    public void setPage(Page page) {
+    public void setPage(PageInfo page) {
         this.page = page;
     }
 

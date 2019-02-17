@@ -1,17 +1,17 @@
 package com.org.graduactionproject.domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Achievement {
     private int id;
     private String title;
+    private String author;
     private String member;
     private String content;
     private Timestamp acquisitiondate;
     private Timestamp time;
     private int index;
-    private String read;
+    private int read_num;
     private Boolean toshow;
     private int type_id;
 
@@ -29,6 +29,14 @@ public class Achievement {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getMember() {
@@ -71,12 +79,12 @@ public class Achievement {
         this.index = index;
     }
 
-    public String getRead() {
-        return read;
+    public int getRead_num() {
+        return read_num;
     }
 
-    public void setRead(String read) {
-        this.read = read;
+    public void setRead_num(int read_num) {
+        this.read_num = read_num;
     }
 
     public Boolean getToshow() {
