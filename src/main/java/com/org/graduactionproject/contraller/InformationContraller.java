@@ -33,7 +33,6 @@ public class InformationContraller {
         int size = jsonObject.getInt("pageSize");
         String type = jsonObject.getString("type");
 
-
         if("achievements".equals(type)){
             return achievementService.getInfoPage(size, page, type);
         }else if("newactivity".equals(type) || "oldactivity".equals(type)){
