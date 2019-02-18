@@ -7,6 +7,7 @@ import com.org.graduactionproject.domain.Achievement;
 import com.org.graduactionproject.domain.Essay;
 import com.org.graduactionproject.service.IAchievementService;
 import com.org.graduactionproject.service.IEssayService;
+import com.org.graduactionproject.token.PassToken;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,7 @@ public class InformationContraller {
 
     @RequestMapping(value = "/getInformationWithPage")
     @ResponseBody
+    @PassToken
     public InfoPageJSONBean getInformationWithPage(@RequestBody String data){
         JSONObject jsonObject = JSONObject.fromObject(data);
         int page = jsonObject.getInt("currentPage");

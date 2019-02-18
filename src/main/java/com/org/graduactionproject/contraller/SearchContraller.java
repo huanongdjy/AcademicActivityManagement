@@ -2,6 +2,7 @@ package com.org.graduactionproject.contraller;
 
 import com.org.graduactionproject.service.IAchievementService;
 import com.org.graduactionproject.service.IEssayService;
+import com.org.graduactionproject.token.PassToken;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,7 @@ public class SearchContraller {
     private IEssayService essayService;
 
     @RequestMapping("/search")
+    @PassToken
     public List<Map<String,Object>> search(@RequestBody String data){
         List<Map<String,Object>> list = new ArrayList<>();
         List<Map<String,Object>> result = null;

@@ -38,4 +38,8 @@ public class UserServiceImpl implements IUserService {
         return map;
     }
 
+    @Override
+    public User findUserByUserId(int userId){
+        return userMapper.findUserByUserId(userId);
+    }
 }

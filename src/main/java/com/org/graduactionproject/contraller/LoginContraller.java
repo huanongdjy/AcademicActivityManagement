@@ -1,7 +1,10 @@
 package com.org.graduactionproject.contraller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
+import com.org.graduactionproject.token.CreatToken;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,7 +30,11 @@ public class LoginContraller {
         String password = jsonObject.getString("password");
         String identity = jsonObject.getString("identity");
         Map<String,Object> map = userService.login(username, password, identity);
+        String token = CreatToken.getToken((User)map.get("user"));
+        map.put("token", token);
         map.put("resultCode", 200);
         return map;
     }
+
+
 }
