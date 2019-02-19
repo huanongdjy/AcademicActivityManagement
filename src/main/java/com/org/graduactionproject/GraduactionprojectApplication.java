@@ -16,4 +16,3 @@ public class GraduactionprojectApplication {
         SpringApplication.run(GraduactionprojectApplication.class, args);
     }
 }
-

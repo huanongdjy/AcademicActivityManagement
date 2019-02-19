@@ -1,5 +1,8 @@
 package com.org.graduactionproject.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.dao.UserMapper;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
@@ -7,6 +10,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service("userService")
@@ -41,5 +45,29 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findUserByUserId(int userId){
         return userMapper.findUserByUserId(userId);
+    }
+
+    @Override
+    public Integer updateUser(String username, int identity, String mialbox, String password, int userId){
+        return userMapper.updateUser(username, identity, mialbox, password, userId);
+    }
+
+    @Override
+    public InfoPageJSONBean getInfoPage(int size, int page){
+        PageHelper.startPage(page, size);
+        List<User> achievements = userMapper.findAll();
+        PageInfo<User> pageInfo = new PageInfo<>(achievements);
+        //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
+//        int pageNum = pageInfo.getPageNum();
+//        int pageSize = pageInfo.getPageSize();
+//        long total = pageInfo.getTotal();
+//        List<User> result = pageInfo.getList();//和上面的users结果相同
+//        System.out.println("pageNum： " + pageNum);
+//        System.out.println("pageSize: " + pageSize);
+//        System.out.println("total: " + total);
+        InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
+        infoPageJSONBean.setPage(pageInfo);
+        infoPageJSONBean.setResultCode("200");
+        return infoPageJSONBean;
     }
 }
