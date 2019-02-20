@@ -36,7 +36,7 @@ public class AchievementContraller {
         String acquisitiondate = jsonObject.getString("acquisitiondate");
         int index = Integer.parseInt(jsonObject.getString("index"));
         boolean toshow = jsonObject.getBoolean("toshow");
-//        byte[] photo
+        List<Byte[]> photoList = jsonObject.getJSONArray("photoList");
         return null;
     }
 }

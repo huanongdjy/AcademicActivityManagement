@@ -10,7 +10,7 @@ public class Achievement {
     private String member;
     private String content;
     private Timestamp acquisitiondate;
-    private Timestamp time;
+    private Timestamp time; // 发布时间
     private int index;
     private int read_num;
     private Boolean toshow;

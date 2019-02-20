@@ -15,7 +15,7 @@ public interface UserMapper {
                 javaType = Identity.class,
                 jdbcType = JdbcType.INTEGER,
                 one = @One(select ="com.org.graduactionproject.dao.IdentityMapper.findIdentityByIdentity"))})
-    User findWithLoginNameAndIdentity(String username, int identity_id);
+    User findWithLoginNameAndIdentity(@Param("username") String username, @Param("identity_id") int identity_id);
 
     @Select("select * from users where username=#{username}")
     @Results({
