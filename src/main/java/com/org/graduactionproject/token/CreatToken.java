@@ -7,7 +7,7 @@ import com.org.graduactionproject.domain.User;
 public class CreatToken {
     public static String getToken(User user) {
         String token="";
-        token= JWT.create().withAudience(user.getUserId() + "")
+        token= JWT.create().withAudience(user.getUserName())
                 .sign(Algorithm.HMAC256(user.getPassword()));
         return token;
     }

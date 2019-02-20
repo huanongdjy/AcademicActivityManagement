@@ -48,8 +48,8 @@ public class UserContraller {
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
         String token = jsonObject.getString("token");
-        String userId = JWT.decode(token).getAudience().get(0);
-        User user = userService.findUserByUserId(Integer.parseInt(userId));
+        String username = JWT.decode(token).getAudience().get(0);
+        User user = userService.findUserByUserName(username);
         map.put("user", user);
         map.put("resultCode", 200);
         return map;
@@ -58,15 +58,22 @@ public class UserContraller {
     @RequestMapping(value = "/updateUser")
     @UserLoginToken
     @Transactional
-    public void updateUser(@RequestBody String data){
+    public Map<String,Object> updateUser(@RequestBody String data){
+        Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
-        int userId = Integer.parseInt(jsonObject.getString("userId"));
-        String user_name = jsonObject.getString("username");
+//        int userId = Integer.parseInt(jsonObject.getString("userId"));
+        String userName = jsonObject.getString("username");
         int identity = Integer.parseInt(jsonObject.getString("identity"));
-        String password = jsonObject.getString("password");
         String mailbox = jsonObject.getString("mailbox");
+        String password = jsonObject.getString("password");
 //        String access = jsonObject.getString("access");
-        userService.updateUser(user_name,identity,mailbox,password,userId);
+        int i = userService.updateUser(userName,identity,mailbox,password);
+        if(i == 1){
+            map.put("message", "更新用户成功");
+        }else {
+            map.put("message", "更新用户失败");
+        }
+        return map;
     }
 
     @RequestMapping(value = "/getUsers")
@@ -77,5 +84,45 @@ public class UserContraller {
         int page = jsonObject.getInt("currentPage");
         int size = jsonObject.getInt("pageSize");
         return userService.getInfoPage(size, page);
+    }
+
+    @RequestMapping(value = "/addUser")
+    @UserLoginToken
+    public Map<String,Object> addUser(@RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        int identity_id = Integer.parseInt(jsonObject.getString("identity"));
+        String user_name = jsonObject.getString("username");
+        String password = jsonObject.getString("password");
+        String mailbox = jsonObject.getString("mailbox");
+        int i = userService.addUser(user_name, password, identity_id, mailbox);
+        if(i == 1){
+            map.put("message", "新增用户成功");
+        }else {
+            map.put("message", "新增用户失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/searchUser")
+    @UserLoginToken
+    public Map<String,Object> searchUser(@RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        User user = userService.findUserByUserName(data);
+        map.put("user",user);
+        map.put("resultCode", 200);
+        return map;
+    }
+
+    @RequestMapping(value = "/deleteUser")
+    @UserLoginToken
+    public Map<String, Object> deleteUser(@RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        Integer issuccess = userService.deleteUser(data);
+        if(issuccess == 1){
+            map.put("resultCode", 200);
+            map.put("message", "删除用户成功");
+        }
+        return map;
     }
 }

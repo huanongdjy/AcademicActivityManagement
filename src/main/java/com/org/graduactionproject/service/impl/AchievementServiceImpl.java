@@ -35,18 +35,10 @@ public class AchievementServiceImpl implements IAchievementService {
 
     public InfoPageJSONBean getInfoPage(int size, int page, String type){
         //分页并查询
-//        PageHelper pageHelper = new PageHelper();
         PageHelper.startPage(page, size);
         List<Achievement> achievements = achievementMapper.findAll();
         PageInfo<Achievement> pageInfo = new PageInfo<>(achievements);
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
-        int pageNum = pageInfo.getPageNum();
-        int pageSize = pageInfo.getPageSize();
-        long total = pageInfo.getTotal();
-        List<Achievement> result = pageInfo.getList();//和上面的users结果相同
-        System.out.println("pageNum： " + pageNum);
-        System.out.println("pageSize: " + pageSize);
-        System.out.println("total: " + total);
         InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
         infoPageJSONBean.setPage(pageInfo);
         infoPageJSONBean.setResultCode("200");

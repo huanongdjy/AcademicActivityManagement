@@ -43,13 +43,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User findUserByUserId(int userId){
-        return userMapper.findUserByUserId(userId);
+    public User findUserByUserName(String username){
+        return userMapper.findUserByUserName(username);
     }
 
     @Override
-    public Integer updateUser(String username, int identity, String mialbox, String password, int userId){
-        return userMapper.updateUser(username, identity, mialbox, password, userId);
+    public Integer updateUser(String username, int identity, String mailbox, String password){
+        return userMapper.updateUser(username, identity, mailbox, password);
     }
 
     @Override
@@ -58,16 +58,26 @@ public class UserServiceImpl implements IUserService {
         List<User> achievements = userMapper.findAll();
         PageInfo<User> pageInfo = new PageInfo<>(achievements);
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
-//        int pageNum = pageInfo.getPageNum();
-//        int pageSize = pageInfo.getPageSize();
-//        long total = pageInfo.getTotal();
-//        List<User> result = pageInfo.getList();//和上面的users结果相同
-//        System.out.println("pageNum： " + pageNum);
-//        System.out.println("pageSize: " + pageSize);
-//        System.out.println("total: " + total);
+        int pageNum = pageInfo.getPageNum();
+        int pageSize = pageInfo.getPageSize();
+        long total = pageInfo.getTotal();
+        List<User> result = pageInfo.getList();//和上面的users结果相同
+        System.out.println("pageNum： " + pageNum);
+        System.out.println("pageSize: " + pageSize);
+        System.out.println("total: " + total);
         InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
         infoPageJSONBean.setPage(pageInfo);
         infoPageJSONBean.setResultCode("200");
         return infoPageJSONBean;
+    }
+
+    @Override
+    public Integer addUser(String userName, String password, int identity_id, String mailbox){
+        return userMapper.addUser(userName, password, identity_id, mailbox);
+    }
+
+    @Override
+    public Integer deleteUser(String username){
+        return userMapper.deleteUser(username);
     }
 }

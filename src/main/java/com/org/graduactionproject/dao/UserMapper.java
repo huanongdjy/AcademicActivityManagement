@@ -17,36 +17,35 @@ public interface UserMapper {
                 one = @One(select ="com.org.graduactionproject.dao.IdentityMapper.findIdentityByIdentity"))})
     User findWithLoginNameAndIdentity(String username, int identity_id);
 
-    @Select("select * from users where userId=#{userId}")
+    @Select("select * from users where username=#{username}")
     @Results({
             @Result(property = "identity",
                     column = "identity_id",
                     javaType = Identity.class,
                     jdbcType = JdbcType.INTEGER,
                     one = @One(select ="com.org.graduactionproject.dao.IdentityMapper.findIdentityByIdentity"))})
-    User findUserByUserId(int userId);
+    User findUserByUserName(String username);
 
-    @Update({"{<script>",
+    @Update({"<script>",
                 "update users",
                 "<set>",
-                    "<if test='username!=null>'",
-                    "username = #{username} , ",
+//                    "<if test='username!=null'>",
+//                    "username = #{username} , ",
+//                    "</if>",
+                    "<if test='password!=null'>",
+                    "password = #{password}",
                     "</if>",
-                    "<if test='password!=null>'",
-                    "password = #{password} , ",
+                    "<if test='mailbox!=null'>",
+                    ", mailbox = #{mailbox}",
                     "</if>",
-                    "<if test='mialbox!=null>'",
-                    "mialbox = #{mialbox} , ",
+                    "<if test='identity_id!=null'>",
+                    ", identity_id = #{identity_id} ",
                     "</if>",
-                    "<if test='identity!=null>'",
-                    "identity = #{identity} , ",
-                    "</if>",
-                    " 1 = 1 ",
                 "</set>",
-                "where userId = #{userId}",
+                "where username = #{username}",
                 "</script>"
              })
-    Integer updateUser(String username, int identity, String mailbox, String password, int userId);
+    Integer updateUser(@Param("username")String username, @Param("identity_id")int identity_id, @Param("mailbox")String mailbox, @Param("password")String password);
 
     @Select("select * from users")
     @Results({
@@ -56,4 +55,10 @@ public interface UserMapper {
                     jdbcType = JdbcType.INTEGER,
                     one = @One(select ="com.org.graduactionproject.dao.IdentityMapper.findIdentityByIdentity"))})
     List<User> findAll();
+
+    @Insert("insert into users(username, password, identity_id, mailbox) values(#{userName}, #{password}, #{identity_id}, #{mailbox})")
+    Integer addUser(String userName, String password, int identity_id, String mailbox);
+
+    @Delete("delete from users where username = #{username}")
+    Integer deleteUser(String username);
 }

@@ -7,7 +7,9 @@ import java.util.Map;
 
 public interface IUserService {
     Map<String,Object> login(String username, String password, String identity);
-    User findUserByUserId(int userId);
-    Integer updateUser(String username, int identity, String mialbox, String password, int userId);
+    User findUserByUserName(String username);
+    Integer updateUser(String username, int identity, String mailbox, String password);
     public InfoPageJSONBean getInfoPage(int size, int page);
+    Integer addUser(String userName, String password, int identity_id, String mailbox);
+    Integer deleteUser(String username);
 }

@@ -1,6 +1,7 @@
 package com.org.graduactionproject.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Essay {
     private int id;
@@ -17,12 +18,12 @@ public class Essay {
     private String oranizer;//组织者
     private int planned_attendance;//计划出席
     private int actual_attendance;//实际出席
-    private byte[] photo;//照片
     private String outcome;//结论、总结
     private int index;
     private int type_id;
     private int read_num;
     private boolean toshow;
+    private List<Photo> photoList;
 
     public int getId() {
         return id;
@@ -136,14 +137,6 @@ public class Essay {
         this.actual_attendance = actual_attendance;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public String getOutcome() {
         return outcome;
     }
@@ -182,5 +175,13 @@ public class Essay {
 
     public void setToshow(boolean toshow) {
         this.toshow = toshow;
+    }
+
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 }

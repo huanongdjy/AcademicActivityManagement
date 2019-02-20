@@ -1,6 +1,7 @@
 package com.org.graduactionproject.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Achievement {
     private int id;
@@ -14,6 +15,7 @@ public class Achievement {
     private int read_num;
     private Boolean toshow;
     private int type_id;
+    private List<Photo> photoList;
 
     public int getId() {
         return id;
@@ -101,5 +103,13 @@ public class Achievement {
 
     public void setType_id(int type_id) {
         this.type_id = type_id;
+    }
+
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 }
