@@ -23,8 +23,8 @@ public interface AchievementMapper {
 
     @Insert("insert into achievement(author, title, member, content, toshow, ordering, " +
             "type_id, acquisitiondate, time) values(#{author}, #{title}, #{member}, #{content}," +
-            "#{toshow}, #{ordering}, #{acquisitiondate}, #{time}")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
+            "#{toshow}, #{ordering}, #{type_id} #{acquisitiondate}, #{time}")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering,
                        Integer type_id, Timestamp acquisitiondate, Timestamp time);
 

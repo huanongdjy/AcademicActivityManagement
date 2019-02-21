@@ -22,9 +22,7 @@ public class AchievementServiceImpl implements IAchievementService {
     public Achievement findAchievementById(int id){
         return achievementMapper.findAchievementById(id);
     }
-    public int addAchievement(Achievement achievement){
-        return achievementMapper.addAchievement(achievement);
-    }
+
     public List<Achievement> findAll(){
         return achievementMapper.findAll();
     }
@@ -60,6 +58,6 @@ public class AchievementServiceImpl implements IAchievementService {
     @Override
     public Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate){
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        return achievementMapper.addAchievement();
+        return achievementMapper.addAchievement(author, title, member, content, toshow, ordering, type_id, acquisitiondate, time);
     }
 }
