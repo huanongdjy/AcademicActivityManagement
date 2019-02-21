@@ -11,7 +11,7 @@ public class Achievement {
     private String content;
     private Timestamp acquisitiondate;
     private Timestamp time; // 发布时间
-    private int index;
+    private int ordering;
     private int read_num;
     private Boolean toshow;
     private int type_id;
@@ -73,12 +73,12 @@ public class Achievement {
         this.time = time;
     }
 
-    public int getIndex() {
-        return index;
+    public int getOrdering() {
+        return ordering;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setOrdering(int ordering) {
+        this.ordering = ordering;
     }
 
     public int getRead_num() {

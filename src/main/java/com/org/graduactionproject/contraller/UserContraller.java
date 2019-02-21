@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
@@ -29,12 +30,14 @@ public class UserContraller {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Map<String,Object> login(@RequestBody String data){
+    public Map<String,Object> login(HttpServletRequest httpServletRequest, @RequestBody String data){
         JSONObject jsonObject = JSONObject.fromObject(data);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
         String identity = jsonObject.getString("identity");
         Map<String,Object> map = userService.login(username, password, identity);
+        HttpSession sessoin=httpServletRequest.getSession();
+        sessoin.setAttribute("user", map.get("user"));
         String token = CreatToken.getToken((User)map.get("user"));
         map.put("token", token);
         map.put("resultCode", 200);
@@ -123,6 +126,19 @@ public class UserContraller {
             map.put("resultCode", 200);
             map.put("message", "删除用户成功");
         }
+        return map;
+    }
+
+    @RequestMapping(value = "/logout")
+    @UserLoginToken
+    public Map<String, Object> logout(HttpServletRequest httpServletRequest, @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        HttpSession session = httpServletRequest.getSession();//获取当前session
+        if(session!=null){
+            session.removeAttribute("user");//从当前session中获取用户信息
+            session.invalidate();//关闭session
+        }
+        map.put("message", "安全退出");
         return map;
     }
 }

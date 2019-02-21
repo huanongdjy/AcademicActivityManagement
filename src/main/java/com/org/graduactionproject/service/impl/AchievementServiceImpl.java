@@ -10,6 +10,7 @@ import com.org.graduactionproject.service.IAchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,20 @@ public class AchievementServiceImpl implements IAchievementService {
         return infoPageJSONBean;
     }
 
+    @Override
     public int updateRead_num(int id){
         return achievementMapper.updateRead_num(id);
+    }
+
+    @Override
+    public Integer updateAchievement(String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate, Integer id){
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        return achievementMapper.updateAchievement(title,member,content,toshow,ordering,type_id,acquisitiondate,time,id);
+    }
+
+    @Override
+    public Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate){
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        return achievementMapper.addAchievement();
     }
 }

@@ -19,7 +19,7 @@ public class Essay {
     private int planned_attendance;//计划出席
     private int actual_attendance;//实际出席
     private String outcome;//结论、总结
-    private int index;
+    private int ordering;
     private int type_id;
     private int read_num;
     private boolean toshow;
@@ -145,12 +145,12 @@ public class Essay {
         this.outcome = outcome;
     }
 
-    public int getIndex() {
-        return index;
+    public int getOrdering() {
+        return ordering;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setOrdering(int ordering) {
+        this.ordering = ordering;
     }
 
     public int getType_id() {

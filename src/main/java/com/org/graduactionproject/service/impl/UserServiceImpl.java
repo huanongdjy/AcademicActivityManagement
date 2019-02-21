@@ -58,13 +58,13 @@ public class UserServiceImpl implements IUserService {
         List<User> achievements = userMapper.findAll();
         PageInfo<User> pageInfo = new PageInfo<>(achievements);
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
-        int pageNum = pageInfo.getPageNum();
-        int pageSize = pageInfo.getPageSize();
-        long total = pageInfo.getTotal();
+//        int pageNum = pageInfo.getPageNum();
+//        int pageSize = pageInfo.getPageSize();
+//        long total = pageInfo.getTotal();
         List<User> result = pageInfo.getList();//和上面的users结果相同
-        System.out.println("pageNum： " + pageNum);
-        System.out.println("pageSize: " + pageSize);
-        System.out.println("total: " + total);
+//        System.out.println("pageNum： " + pageNum);
+//        System.out.println("pageSize: " + pageSize);
+//        System.out.println("total: " + total);
         InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
         infoPageJSONBean.setPage(pageInfo);
         infoPageJSONBean.setResultCode("200");
