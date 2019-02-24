@@ -23,7 +23,7 @@ public interface AchievementMapper {
 
     @Insert("insert into achievement(author, title, member, content, toshow, ordering, " +
             "type_id, acquisitiondate, time) values(#{author}, #{title}, #{member}, #{content}," +
-            "#{toshow}, #{ordering}, #{type_id} #{acquisitiondate}, #{time}")
+            "#{toshow}, #{ordering}, #{type_id}, #{acquisitiondate}, #{time})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering,
                        Integer type_id, Timestamp acquisitiondate, Timestamp time);
@@ -48,6 +48,15 @@ public interface AchievementMapper {
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findAchievementPhotoById", fetchType= FetchType.EAGER))})
     List<Map<String,Object>> findAchievementByTitle(@Param("title")String title);
 
+    @Select("select * from achievement where title like CONCAT('%', #{title},'%')")
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "photoList",
+                    column = "id",
+                    javaType = List.class,
+                    jdbcType = JdbcType.INTEGER,
+                    many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findAchievementPhotoById", fetchType= FetchType.EAGER))})
+    List<Achievement> searchAchievementByTitle(String title);
 
     @Update("update achievement set read_num = read_num + 1 where id=#{id}")
     int updateRead_num(@Param("id") int id);
@@ -84,4 +93,7 @@ public interface AchievementMapper {
             "</script>"
     })
     Integer updateAchievement(String title, String member, String content, @Param("toshow") Boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate,Timestamp time, Integer id);
+
+    @Delete("delete from achievement where id=#{id}")
+    Integer deleteAchievement(Integer id);
 }

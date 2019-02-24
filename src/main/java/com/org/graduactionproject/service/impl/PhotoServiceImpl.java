@@ -21,5 +21,8 @@ public class PhotoServiceImpl implements IPhotoService {
         return photoMapper.addAchievementPhoto(photo_name, url, id);
     }
 
-
+    @Override
+    public Integer deleteAchievement(Integer id){
+        return photoMapper.deleteAchievementPhoto(id);
+    }
 }

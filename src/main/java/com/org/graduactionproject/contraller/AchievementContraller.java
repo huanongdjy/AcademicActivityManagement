@@ -1,5 +1,6 @@
 package com.org.graduactionproject.contraller;
 
+import com.auth0.jwt.JWT;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
@@ -8,6 +9,7 @@ import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IAchievementService;
 import com.org.graduactionproject.service.IPhotoService;
 import com.org.graduactionproject.token.PassToken;
+import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -39,7 +41,7 @@ public class AchievementContraller {
     @RequestMapping(value = "/updateAchievement")
     @ResponseBody
     @Transactional
-    @PassToken
+    @UserLoginToken
     public Map<String, Object> updateAchievement(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -78,20 +80,19 @@ public class AchievementContraller {
     @RequestMapping(value = "/addAchievement")
     @ResponseBody
     @Transactional
-    @PassToken
+    @UserLoginToken
     public Map<String, Object> addAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
-        User user = (User)session.getAttribute("user");
-        String author = user.getUsername();
+        String token = httpServletRequest.getHeader("Authorization");
+//        User user = (User)session.getAttribute("user");
+//        String author = user.getUsername();
+        String author = JWT.decode(token).getAudience().get(0);
         JSONObject jsonObject = JSONObject.fromObject(data);
-//        Integer id = Integer.parseInt(jsonObject.getString("id"));
         String title = jsonObject.getString("title");
-//        String author = jsonObject.getString("author");
         String member = jsonObject.getString("member");
         Boolean toshow = jsonObject.getBoolean("toshow");
         String content = jsonObject.getString("content");
-//        List photoList = new ArrayList();
 
         Integer ordering = Integer.parseInt(jsonObject.getString("ordering"));
         Integer type_id = Integer.parseInt(jsonObject.getString("type_id"));
@@ -114,6 +115,40 @@ public class AchievementContraller {
             map.put("resultCode", 200);
         }else {
             map.put("message", "新增失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/deleteAchievement")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String, Object> deleteAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        Integer id = Integer.parseInt(data);
+        Integer ret1 = achievementService.deleteAchievement(id);
+
+        Integer ret2 = photoService.deleteAchievement(id);
+        if (ret1 == 1 ){
+            map.put("resultCode", 200);
+            map.put("message", "删除成功");
+        } else {
+            map.put("resultCode", 200);
+            map.put("message", "该成果不存在");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/searchaChievement")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String,Object> searchaChievement( @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        List<Achievement> achievements = achievementService.searchAchievementByTitle(data);
+        if (achievements != null){
+            map.put("resultCode", 200);
+            map.put("achievements", achievements);
         }
         return map;
     }

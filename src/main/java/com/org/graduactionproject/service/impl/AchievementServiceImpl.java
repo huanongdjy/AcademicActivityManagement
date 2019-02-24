@@ -60,4 +60,14 @@ public class AchievementServiceImpl implements IAchievementService {
         Timestamp time = new Timestamp(System.currentTimeMillis());
         return achievementMapper.addAchievement(author, title, member, content, toshow, ordering, type_id, acquisitiondate, time);
     }
+
+    @Override
+    public Integer deleteAchievement(Integer id){
+        return achievementMapper.deleteAchievement(id);
+    }
+
+    @Override
+    public List<Achievement> searchAchievementByTitle(String title){
+        return achievementMapper.searchAchievementByTitle(title);
+    }
 }

@@ -6,6 +6,7 @@ import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
 import com.org.graduactionproject.token.CreatToken;
+import com.org.graduactionproject.token.PassToken;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -30,6 +31,7 @@ public class UserContraller {
 
     @RequestMapping(value = "/login")
     @ResponseBody
+    @PassToken
     public Map<String,Object> login(HttpServletRequest httpServletRequest, @RequestBody String data){
         JSONObject jsonObject = JSONObject.fromObject(data);
         String username = jsonObject.getString("username");
