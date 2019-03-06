@@ -1,14 +1,9 @@
 package com.org.graduactionproject.contraller;
 
 import com.auth0.jwt.JWT;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.Achievement;
-import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IAchievementService;
 import com.org.graduactionproject.service.IPhotoService;
-import com.org.graduactionproject.token.PassToken;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
