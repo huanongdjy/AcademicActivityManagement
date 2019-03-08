@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 import org.apache.ibatis.type.JdbcType;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +20,15 @@ public interface EssayMapper {
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Map<String, Object>> findEssayByTitle(@Param("title") String title);
 
-    @Insert("insert into essay values(title, theme, summary, time, location," +
-            "content, precautions, fund, oranizer, planned_attendance,actual_attendance,photo,outcome, index, read)")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
-    int addAchievement(Essay essay);
-
+    @Insert("insert into essay(title, author, summary, time, hold_time, location,content, fund, organizer, " +
+            "planned_attendance, ordering, type_id) " +
+            "values(#{title}, #{author}, #{summary}, #{time}, #{holdtime}, #{location}," +
+            "#{content},  #{fund}, #{organizer}, #{planned_attendance}, " +
+            "#{ordering}, #{type_id})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    Integer addEssay(String title, String author, String summary, Timestamp time, Timestamp holdtime, String location,
+                     String content, String fund, String organizer, Integer planned_attendance,
+                     Integer ordering, Integer type_id);
     @Update("update essay set index = #{index} where id=#{id}")
     int updateIndex(@Param("id") int id, @Param("index")int index);
 

@@ -28,8 +28,13 @@ public class EssayServiceImpl implements IEssayService {
     public List<Map<String,Object>> findEssayByTitle(String title){
         return essayMapper.findEssayByTitle(title);
     }
-    public int addAchievement(Essay essay){
-        return essayMapper.addAchievement(essay);
+    public int addEssay(String title, String author, String summary, Timestamp holdtime, String location,
+                        String content, String fund, String organizer, Integer planned_attendance,
+                        Integer type_id){
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        Integer ordering = 0;
+        return essayMapper.addEssay(title,author, summary, time, holdtime, location,content
+        , fund, organizer, planned_attendance, ordering, type_id);
     }
     public int updateIndex(int id, int index){
         return essayMapper.updateIndex(id, index);

@@ -25,4 +25,19 @@ public class PhotoServiceImpl implements IPhotoService {
     public Integer deleteAchievement(Integer id){
         return photoMapper.deleteAchievementPhoto(id);
     }
+
+    @Override
+    public List<Photo> findEssayPhotoById(Integer id){
+        return photoMapper.findEssayPhotoById(id);
+    }
+
+    @Override
+    public Integer addEssayPhoto(String photo_name, String url, Integer id){
+        return photoMapper.addEssayPhoto(photo_name, url, id);
+    }
+
+    @Override
+    public Integer deleteEssay(Integer id){
+        return photoMapper.deleteEssay(id);
+    }
 }

@@ -18,7 +18,7 @@ public class Essay {
     private String oranizer;//组织者
     private int planned_attendance;//计划出席
     private int actual_attendance;//实际出席
-    private String outcome;//结论、总结
+//    private String outcome;//结论、总结
     private int ordering;
     private int type_id;
     private int read_num;
@@ -135,14 +135,6 @@ public class Essay {
 
     public void setActual_attendance(int actual_attendance) {
         this.actual_attendance = actual_attendance;
-    }
-
-    public String getOutcome() {
-        return outcome;
-    }
-
-    public void setOutcome(String outcome) {
-        this.outcome = outcome;
     }
 
     public int getOrdering() {
