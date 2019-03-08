@@ -14,6 +14,8 @@ public interface IEssayService {
                  Integer type_id/*, boolean toshow*/);
     int updateIndex(int id, int index);
     List<Essay> findEssayByType_name(String type_name);
+    List<Essay> searchEssayByTitle(String title);
     InfoPageJSONBean getInfoPage(int size, int page, String type);
     int updateRead_num(int id);
+    Integer deleteEssay(Integer id);
 }

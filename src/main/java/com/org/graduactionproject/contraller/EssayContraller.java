@@ -1,6 +1,8 @@
 package com.org.graduactionproject.contraller;
 
 import com.auth0.jwt.JWT;
+import com.org.graduactionproject.domain.Achievement;
+import com.org.graduactionproject.domain.Essay;
 import com.org.graduactionproject.service.IEssayService;
 import com.org.graduactionproject.service.IPhotoService;
 import com.org.graduactionproject.token.UserLoginToken;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -75,6 +78,51 @@ public class EssayContraller {
         }else {
             map.put("message", "新增失败");
         }
+        return map;
+    }
+
+    @RequestMapping(value = "/searchaEssays")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String,Object> searchEssays( @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        List<Essay> essays = essayService.searchEssayByTitle(data);
+        if (essays != null){
+            map.put("resultCode", 200);
+            map.put("achievements", essays);
+        }
+        return map;
+    }
+
+
+    @RequestMapping(value = "/deleteEssay")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String,Object> deleteEssay( @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        Integer id = Integer.parseInt(data);
+        Integer ret = essayService.deleteEssay(id);
+
+        Integer ret2 = photoService.deleteAchievement(id);
+        if (ret == 1 ){
+            map.put("resultCode", 200);
+            map.put("message", "删除成功");
+        } else {
+            map.put("resultCode", 200);
+            map.put("message", "该文章不存在");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/updateEssay")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String, Object> updateEssay(@RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        JSONObject jsonObject = JSONObject.fromObject(data);
         return map;
     }
 }

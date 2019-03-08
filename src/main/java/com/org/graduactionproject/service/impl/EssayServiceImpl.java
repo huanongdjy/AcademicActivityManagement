@@ -78,4 +78,10 @@ public class EssayServiceImpl implements IEssayService {
     public int updateRead_num(int id){
         return essayMapper.updateRead_num(id);
     }
+    public List<Essay> searchEssayByTitle(String title){
+        return essayMapper.searchEssayByTitle(title);
+    }
+    public Integer deleteEssay(Integer id){
+        return essayMapper.deleteEssay(id);
+    }
 }

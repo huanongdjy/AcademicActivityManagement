@@ -41,6 +41,18 @@ public interface EssayMapper {
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> findEssayByType_id(@Param("type_id")int type, @Param("hold_time")String hold_time);
 
+    @Select("select * from essay where title like CONCAT('%', #{title},'%') order by time" )
+    @Results({
+            @Result(property = "photolist",
+                    column = "id",
+                    javaType = Photo.class,
+                    jdbcType = JdbcType.INTEGER,
+                    many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
+    List<Essay> searchEssayByTitle(String title);
+
     @Update("update essay set read_num = read_num + 1 where id=#{id}")
     int updateRead_num(@Param("id") int id);
+
+    @Delete("delete from essay where id=#{id}")
+    Integer deleteEssay(Integer id);
 }
