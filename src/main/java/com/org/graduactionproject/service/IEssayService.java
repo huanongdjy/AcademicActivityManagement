@@ -18,4 +18,7 @@ public interface IEssayService {
     InfoPageJSONBean getInfoPage(int size, int page, String type);
     int updateRead_num(int id);
     Integer deleteEssay(Integer id);
+    Integer updateEssay(String title, String author, String summary, Timestamp hold_time, String location,
+                        String content, String fund, String organizer, Integer planned_attendance,
+                        Integer ordering, Integer type_id, Integer id);
 }

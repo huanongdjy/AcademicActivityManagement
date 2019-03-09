@@ -57,7 +57,7 @@ public class EssayServiceImpl implements IEssayService {
         //根据当前时间戳，查询活动是否已举办
         Calendar calendar= Calendar.getInstance();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(dateFormat.format(calendar.getTime()));
+//        System.out.println(dateFormat.format(calendar.getTime()));
         String  curr_tinme = dateFormat.format(calendar.getTime());
         List<Essay> essays = essayMapper.findEssayByType_id(type_id, curr_tinme);
         PageInfo<Essay> pageInfo = new PageInfo<>(essays);
@@ -83,5 +83,13 @@ public class EssayServiceImpl implements IEssayService {
     }
     public Integer deleteEssay(Integer id){
         return essayMapper.deleteEssay(id);
+    }
+
+    public Integer updateEssay(String title, String author, String summary, Timestamp hold_time, String location,
+                        String content, String fund, String organizer, Integer planned_attendance,
+                        Integer ordering, Integer type_id, Integer id){
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        return essayMapper.updateEssay(title, author, summary, time, hold_time, location,content,fund, organizer, planned_attendance
+                    ,ordering,type_id,id);
     }
 }

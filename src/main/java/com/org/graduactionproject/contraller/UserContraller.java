@@ -38,6 +38,10 @@ public class UserContraller {
         String password = jsonObject.getString("password");
         String identity = jsonObject.getString("identity");
         Map<String,Object> map = userService.login(username, password, identity);
+        if(map.get("user")==null){
+            map.put("message", "用户不存在");
+            return map;
+        }
         HttpSession sessoin=httpServletRequest.getSession();
         sessoin.setAttribute("user", map.get("user"));
         String token = CreatToken.getToken((User)map.get("user"));

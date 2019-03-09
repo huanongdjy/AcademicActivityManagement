@@ -6,7 +6,7 @@ import java.util.List;
 public class Essay {
     private int id;
     private String title;
-    private String theme;
+//    private String theme;
     private String summary;
     private String author;
     private Timestamp time;
@@ -15,7 +15,7 @@ public class Essay {
     private String content;
     private String precautions;//注意事项
     private String fund;//资金
-    private String oranizer;//组织者
+    private String organizer;//组织者
     private int planned_attendance;//计划出席
     private int actual_attendance;//实际出席
 //    private String outcome;//结论、总结
@@ -41,13 +41,13 @@ public class Essay {
         this.title = title;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
+//    public String getTheme() {
+//        return theme;
+//    }
+//
+//    public void setTheme(String theme) {
+//        this.theme = theme;
+//    }
 
     public String getSummary() {
         return summary;
@@ -113,12 +113,12 @@ public class Essay {
         this.fund = fund;
     }
 
-    public String getOranizer() {
-        return oranizer;
+    public String getOrganizer() {
+        return organizer;
     }
 
-    public void setOranizer(String oranizer) {
-        this.oranizer = oranizer;
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 
     public int getPlanned_attendance() {

@@ -13,6 +13,7 @@ import java.util.Map;
 public interface EssayMapper {
     @Select("select * from Essay where title like CONCAT('%', #{title},'%')")
     @Results({
+            @Result(property = "id", column = "id"),
             @Result(property = "photolist",
                     column = "id",
                     javaType = Photo.class,
@@ -22,18 +23,20 @@ public interface EssayMapper {
 
     @Insert("insert into essay(title, author, summary, time, hold_time, location,content, fund, organizer, " +
             "planned_attendance, ordering, type_id) " +
-            "values(#{title}, #{author}, #{summary}, #{time}, #{holdtime}, #{location}," +
+            "values(#{title}, #{author}, #{summary}, #{time}, #{hold_time}, #{location}," +
             "#{content},  #{fund}, #{organizer}, #{planned_attendance}, " +
             "#{ordering}, #{type_id})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    Integer addEssay(String title, String author, String summary, Timestamp time, Timestamp holdtime, String location,
+    Integer addEssay(String title, String author, String summary, Timestamp time, Timestamp hold_time, String location,
                      String content, String fund, String organizer, Integer planned_attendance,
                      Integer ordering, Integer type_id);
+
     @Update("update essay set index = #{index} where id=#{id}")
     int updateIndex(@Param("id") int id, @Param("index")int index);
 
     @Select("select * from essay where type_id=#{type_id} and hold_time >= #{hold_time}" )
     @Results({
+            @Result(property = "id", column = "id"),
             @Result(property = "photolist",
                     column = "id",
                     javaType = Photo.class,
@@ -43,6 +46,7 @@ public interface EssayMapper {
 
     @Select("select * from essay where title like CONCAT('%', #{title},'%') order by time" )
     @Results({
+            @Result(property = "id", column = "id"),
             @Result(property = "photolist",
                     column = "id",
                     javaType = Photo.class,
@@ -55,4 +59,51 @@ public interface EssayMapper {
 
     @Delete("delete from essay where id=#{id}")
     Integer deleteEssay(Integer id);
+
+    @Update({"<script>",
+            "update essay",
+            "<set>",
+            "<if test='title!=null'>",
+            "title = #{title}, ",
+            "</if>",
+            "<if test='author!=null'>",
+            "author = #{author}, ",
+            "</if>",
+            "<if test='summary!=null'>",
+            "summary = #{summary}, ",
+            "</if>",
+            "<if test='time!=null'>",
+            "time = #{time},  ",
+            "</if>",
+            "<if test='hold_time!=null'>",
+            "hold_time = #{hold_time},  ",
+            "</if>",
+            "<if test='location!=null'>",
+            "location = #{location},  ",
+            "</if>",
+            "<if test='content!=null'>",
+            "content = #{content},  ",
+            "</if>",
+            "<if test='fund!=null'>",
+            "fund = #{fund},  ",
+            "</if>",
+            "<if test='organizer!=null'>",
+            "organizer = #{organizer},  ",
+            "</if>",
+            "<if test='planned_attendance!=null'>",
+            "planned_attendance = #{planned_attendance},  ",
+            "</if>",
+            "<if test='ordering!=null'>",
+            "ordering = #{ordering},  ",
+            "</if>",
+            "<if test='type_id!=null'>",
+            "type_id = #{type_id},  ",
+            "</if>",
+            "</set>",
+            "where id = #{id}",
+            "</script>"
+    })
+    Integer updateEssay(String title, String author, String summary, Timestamp time, Timestamp hold_time, String location,
+                     String content, String fund, String organizer, Integer planned_attendance,
+                     Integer ordering, Integer type_id, Integer id);
 }
