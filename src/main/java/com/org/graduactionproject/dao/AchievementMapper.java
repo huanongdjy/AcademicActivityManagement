@@ -25,8 +25,8 @@ public interface AchievementMapper {
             "type_id, acquisitiondate, time) values(#{author}, #{title}, #{member}, #{content}," +
             "#{toshow}, #{ordering}, #{type_id}, #{acquisitiondate}, #{time})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    int addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering,
-                       Integer type_id, Timestamp acquisitiondate, Timestamp time);
+    int addAchievement(@Param("author")String author, @Param("title")String title, @Param("member")String member,  @Param("content")String content, @Param("toshow")boolean toshow, @Param("ordering")Integer ordering,
+                       @Param("type_id")Integer type_id, @Param("acquisitiondate")Timestamp acquisitiondate, @Param("time")Timestamp time);
 
     @Select("select * from achievement order by acquisitiondate")//根据获得成果的日期排序
     @Results({
@@ -92,7 +92,7 @@ public interface AchievementMapper {
             "where id = #{id}",
             "</script>"
     })
-    Integer updateAchievement(String title, String member, String content, @Param("toshow") Boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate,Timestamp time, Integer id);
+    Integer updateAchievement(@Param("title")String title, @Param("member")String member, @Param("content")String content, @Param("toshow") Boolean toshow, @Param("ordering")Integer ordering, @Param("type_id")Integer type_id, @Param("acquisitiondate")Timestamp acquisitiondate,@Param("time")Timestamp time, @Param("id")Integer id);
 
     @Delete("delete from achievement where id=#{id}")
     Integer deleteAchievement(Integer id);

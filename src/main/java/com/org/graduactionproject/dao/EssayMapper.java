@@ -27,9 +27,9 @@ public interface EssayMapper {
             "#{content},  #{fund}, #{organizer}, #{planned_attendance}, " +
             "#{ordering}, #{type_id})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    Integer addEssay(String title, String author, String summary, Timestamp time, Timestamp hold_time, String location,
-                     String content, String fund, String organizer, Integer planned_attendance,
-                     Integer ordering, Integer type_id);
+    Integer addEssay(@Param("title")String title, @Param("author")String author, @Param("summary")String summary, @Param("time")Timestamp time, @Param("hold_time")Timestamp hold_time,  @Param("location")String location,
+                     @Param("content")String content, @Param("fund")String fund,  @Param("organizer")String organizer, @Param("planned_attendance")Integer planned_attendance,
+                     @Param("ordering")Integer ordering, @Param("type_id")Integer type_id);
 
     @Update("update essay set index = #{index} where id=#{id}")
     int updateIndex(@Param("id") int id, @Param("index")int index);
@@ -52,13 +52,13 @@ public interface EssayMapper {
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
-    List<Essay> searchEssayByTitle(String title);
+    List<Essay> searchEssayByTitle(@Param("title")String title);
 
     @Update("update essay set read_num = read_num + 1 where id=#{id}")
-    int updateRead_num(@Param("id") int id);
+    int updateRead_num(@Param("id")int id);
 
     @Delete("delete from essay where id=#{id}")
-    Integer deleteEssay(Integer id);
+    Integer deleteEssay(@Param("id")Integer id);
 
     @Update({"<script>",
             "update essay",
@@ -103,7 +103,7 @@ public interface EssayMapper {
             "where id = #{id}",
             "</script>"
     })
-    Integer updateEssay(String title, String author, String summary, Timestamp time, Timestamp hold_time, String location,
-                     String content, String fund, String organizer, Integer planned_attendance,
-                     Integer ordering, Integer type_id, Integer id);
+    Integer updateEssay(@Param("title")String title, @Param("author")String author, @Param("summary")String summary, @Param("time")Timestamp time, @Param("hold_time")Timestamp hold_time, @Param("location")String location,
+                        @Param("content")String content, @Param("fund")String fund,  @Param("organizer")String organizer,  @Param("planned_attendance")Integer planned_attendance,
+                        @Param("ordering")Integer ordering, @Param("type_id")Integer type_id, @Param("id")Integer id);
 }

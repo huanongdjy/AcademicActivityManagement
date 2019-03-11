@@ -11,7 +11,7 @@ public interface TypeMapper {
 
     @Insert("insert into type(type_name, description) values(#{type_name}, #{description})")
     @Options(useGeneratedKeys = true, keyProperty = "type_id")
-    Integer addType(String type_name, String description);
+    Integer addType(@Param("type_name")String type_name, @Param("description")String description);
 
     @Update({"<script>",
             "update type",
@@ -26,7 +26,7 @@ public interface TypeMapper {
             "where type_id = #{type_id}",
             "</script>"
     })
-    Integer updateType(@Param("type_name")String type_name,String description, @Param("type_id")int type_id);
+    Integer updateType(@Param("type_name")String type_name,@Param("description")String description, @Param("type_id")int type_id);
 
     @Delete("delete from type where type_id=#{type_id}")
     Integer deleteType(int type_id);
