@@ -7,6 +7,8 @@ import com.org.graduactionproject.service.IAchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service("achievementReadService")
 public class AchievementReadServiceImpl implements IAchievementReadService {
     @Autowired
@@ -21,7 +23,8 @@ public class AchievementReadServiceImpl implements IAchievementReadService {
         return achievementRead;
     }
     public int addAchievement(String ip, int id){
-        AchievementRead achievementRead = new AchievementRead(id, ip);
-        return achievementReadMapper.addAchievement(achievementRead);
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        AchievementRead achievementRead = new AchievementRead(id, ip, time);
+        return achievementReadMapper.addAchievementRead(achievementRead);
     }
 }

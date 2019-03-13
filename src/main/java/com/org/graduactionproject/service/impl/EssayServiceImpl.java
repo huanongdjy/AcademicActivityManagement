@@ -52,14 +52,22 @@ public class EssayServiceImpl implements IEssayService {
 //        PageHelper pageHelper = new PageHelper();
         PageHelper.startPage(page, size);
         //先获取类型 type_id
-        int type_id = typeMapper.findType_idByType_name(type_name);
-        if(type_id == -1) return null;
+//        int type_id = typeMapper.findType_idByType_name(type_name);
+//        if(type_id == -1) return null;
         //根据当前时间戳，查询活动是否已举办
         Calendar calendar= Calendar.getInstance();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 //        System.out.println(dateFormat.format(calendar.getTime()));
         String  curr_tinme = dateFormat.format(calendar.getTime());
-        List<Essay> essays = essayMapper.findEssayByType_id(type_id, curr_tinme);
+        List<Essay> essays = null;
+        if ("newactivity".equals(type_name)){
+            essays = essayMapper.findOldActivity(curr_tinme);
+        }else if("oldactivity".equals(type_name)){
+            essays = essayMapper.findNewActivity(curr_tinme);
+        }else if("activity".equals(type_name)){
+            essays = essayMapper.getAllEssays();
+        }
+
         PageInfo<Essay> pageInfo = new PageInfo<>(essays);
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
         int pageNum = pageInfo.getPageNum();

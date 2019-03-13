@@ -1,16 +1,19 @@
 package com.org.graduactionproject.domain;
 
+import java.sql.Timestamp;
+
 public class EssayRead {
     private int read_id;
     private int id;
     private String ip;
-
+    private Timestamp time;
     public EssayRead() {
     }
 
-    public EssayRead(int id, String ip) {
-        this.id = id;
+    public EssayRead(int read_id, String ip, Timestamp time) {
+        this.read_id = read_id;
         this.ip = ip;
+        this.time = time;
     }
 
     public int getRead_id() {

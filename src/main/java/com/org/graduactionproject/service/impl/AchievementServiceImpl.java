@@ -32,7 +32,7 @@ public class AchievementServiceImpl implements IAchievementService {
         return achievementMapper.findAchievementByTitle(title);
     }
 
-    public InfoPageJSONBean getInfoPage(int size, int page, String type){
+    public InfoPageJSONBean getInfoPage(int size, int page){
         //分页并查询
         PageHelper.startPage(page, size);
         List<Achievement> achievements = achievementMapper.findAll();

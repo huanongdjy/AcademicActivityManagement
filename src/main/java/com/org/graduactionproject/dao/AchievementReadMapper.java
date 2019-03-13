@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.sql.Timestamp;
+
 public interface AchievementReadMapper {
     @Select("select * from achievementread where read_id=#{read_id}")
     AchievementRead findAchievementReadByRead_id(@Param("read_id") int read_id);
@@ -15,5 +17,8 @@ public interface AchievementReadMapper {
 
     @Insert("insert into achievementread(ip, id) values(#{ip}, #{id})")
     @Options(useGeneratedKeys = true, keyProperty = "read_id")
-    int addAchievement(AchievementRead achievementRead);
+    int addAchievementRead(AchievementRead achievementRead);
+
+    @Select("select COUNT(*) from achievementread where read_time between #{begTime} and #{endTime}")
+    Integer getRandAchievementNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 }

@@ -44,6 +44,36 @@ public interface EssayMapper {
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> findEssayByType_id(@Param("type_id")int type, @Param("hold_time")String hold_time);
 
+    @Select("select * from essay " )
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "photolist",
+                    column = "id",
+                    javaType = Photo.class,
+                    jdbcType = JdbcType.INTEGER,
+                    many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
+    List<Essay> getAllEssays();
+
+    @Select("select * from essay where hold_time <= #{hold_time}" )
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "photolist",
+                    column = "id",
+                    javaType = Photo.class,
+                    jdbcType = JdbcType.INTEGER,
+                    many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
+    List<Essay> findOldActivity(@Param("hold_time")String hold_time);
+
+    @Select("select * from essay where hold_time > #{hold_time}" )
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "photolist",
+                    column = "id",
+                    javaType = Photo.class,
+                    jdbcType = JdbcType.INTEGER,
+                    many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
+    List<Essay> findNewActivity(@Param("hold_time")String hold_time);
+
     @Select("select * from essay where title like CONCAT('%', #{title},'%') order by time" )
     @Results({
             @Result(property = "id", column = "id"),

@@ -8,6 +8,8 @@ import com.org.graduactionproject.service.IEssayReadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service("essayreadService")
 public class EssayReadServiceImpl implements IEssayReadService {
     @Autowired
@@ -24,7 +26,8 @@ public class EssayReadServiceImpl implements IEssayReadService {
         return essayread;
     }
     public int addEssayRead(String ip, int id){
-        EssayRead essayread = new EssayRead(id, ip);
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        EssayRead essayread = new EssayRead(id, ip, time);
        return essayReadMapper.addReaded(essayread);
     }
 

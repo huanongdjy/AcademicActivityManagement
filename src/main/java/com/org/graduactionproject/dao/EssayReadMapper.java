@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.sql.Timestamp;
+
 public interface EssayReadMapper {
     @Select("select * from essayread where read_id=#{read_id}")
     EssayRead findEssayReadByRead_id(@Param("read_id") int read_id);
@@ -15,5 +17,8 @@ public interface EssayReadMapper {
 
     @Insert("insert into essayread(ip, id) values(#{ip}, #{id})")
     @Options(useGeneratedKeys = true, keyProperty = "read_id")
-    int addReaded(EssayRead essayread);
+    Integer addReaded(EssayRead essayread);
+
+    @Select("select COUNT(*) from essayread where read_time between #{begTime} and #{endTime}")
+    Integer getRandEssayNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 }

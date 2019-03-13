@@ -13,7 +13,7 @@ public interface IAchievementService {
     List<Achievement> findAll();
     List<Map<String,Object>> findAchievementByTitle(String title);
     List<Achievement> searchAchievementByTitle(String title);
-    InfoPageJSONBean getInfoPage(int size, int page, String type);
+    InfoPageJSONBean getInfoPage(int size, int page);
     int updateRead_num(int id);
     Integer updateAchievement(String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate, Integer id);
     Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate);
