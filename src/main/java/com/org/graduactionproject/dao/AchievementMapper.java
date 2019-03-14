@@ -95,5 +95,8 @@ public interface AchievementMapper {
     Integer updateAchievement(@Param("title")String title, @Param("member")String member, @Param("content")String content, @Param("toshow") Boolean toshow, @Param("ordering")Integer ordering, @Param("type_id")Integer type_id, @Param("acquisitiondate")Timestamp acquisitiondate,@Param("time")Timestamp time, @Param("id")Integer id);
 
     @Delete("delete from achievement where id=#{id}")
-    Integer deleteAchievement(Integer id);
+    Integer deleteAchievement(@Param("id")Integer id);
+
+    @Select("select COUNT(*) from achievement where time between #{begTime} and #{endTime}")
+    Integer getAddAchievementNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 }
