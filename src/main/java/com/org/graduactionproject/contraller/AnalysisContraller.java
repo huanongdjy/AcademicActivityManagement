@@ -67,4 +67,24 @@ public class AnalysisContraller {
         list = analysisService.getPieData(begTime,endTime);
         return list;
     }
+
+    @RequestMapping(value = "/getLineChart")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public List<Map<String, Object>>  getLineChart(@RequestBody String data){
+        List<Map<String, Object>> list = new ArrayList<>();
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        String time0 = jsonObject.getString("time0");
+        String time1 = jsonObject.getString("time1");
+        String time2 = jsonObject.getString("time2");;
+        String time3 = jsonObject.getString("time3");;
+        String time4 = jsonObject.getString("time4");;
+        String time5 = jsonObject.getString("time5");;
+        String time6 = jsonObject.getString("time6");;
+        String time7 = jsonObject.getString("time7");
+
+        list = analysisService.getLineChart(time0, time1,time2, time3, time4, time5, time6, time7);
+        return list;
+    }
 }

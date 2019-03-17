@@ -14,7 +14,7 @@ public interface EssayMapper {
     @Select("select * from Essay where title like CONCAT('%', #{title},'%')")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,
@@ -37,7 +37,7 @@ public interface EssayMapper {
     @Select("select * from essay where type_id=#{type_id} and hold_time >= #{hold_time}" )
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,
@@ -47,9 +47,9 @@ public interface EssayMapper {
     @Select("select * from essay " )
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> getAllEssays();
@@ -57,7 +57,7 @@ public interface EssayMapper {
     @Select("select * from essay where hold_time <= #{hold_time}" )
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,
@@ -67,7 +67,7 @@ public interface EssayMapper {
     @Select("select * from essay where hold_time > #{hold_time}" )
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,
@@ -77,7 +77,7 @@ public interface EssayMapper {
     @Select("select * from essay where title like CONCAT('%', #{title},'%') order by time" )
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(property = "photolist",
+            @Result(property = "photoList",
                     column = "id",
                     javaType = Photo.class,
                     jdbcType = JdbcType.INTEGER,

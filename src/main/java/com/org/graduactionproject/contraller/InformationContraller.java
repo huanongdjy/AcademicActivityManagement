@@ -37,8 +37,8 @@ public class InformationContraller {
 
         if("achievements".equals(type)){
             return achievementService.getInfoPage(size, page);
-//        }else if ("activity".equals(type)){
-//            return essayService.getInfoPage(size, page, type);
+        }else if ("activity".equals(type)){
+            return essayService.getInfoPage(size, page, type);
         }else if("newactivity".equals(type) || "oldactivity".equals(type)){
             return essayService.getInfoPage(size, page, type);
         }

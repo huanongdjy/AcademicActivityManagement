@@ -11,4 +11,5 @@ public interface IAnalysisService {
     Integer getAttendanceNum(String begTime, String endTime);
 
     List<Map<String, Object>> getPieData(String begTime, String endTime);
+    List<Map<String, Object>> getLineChart(String time0, String time1, String time2, String time3, String time4, String time5, String time6, String time7);
 }

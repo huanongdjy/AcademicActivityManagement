@@ -38,17 +38,17 @@ public class AnalysisServiceImpl implements IAnalysisService {
 
     public Integer getAddAchievementNum(String begTime, String endTime){
         Integer num = achievementMapper.getAddAchievementNum(begTime, endTime);
-        return num;
+        return num == null ? 0 : num  ;
     }
 
     public Integer getHoldActivityNum(String begTime, String endTime){
         Integer num = essayMapper.getHoldActivityNum(begTime, endTime);
-        return num;
+        return num == null ? 0 : num;
     }
 
     public Integer getAttendanceNum(String begTime, String endTime){
         Integer num = essayMapper.getAttendanceNum(begTime, endTime);
-        return num;
+        return num == null ? 0 : num;
     }
 
     public List<Map<String, Object>> getPieData(String begTime, String endTime){
@@ -61,6 +61,43 @@ public class AnalysisServiceImpl implements IAnalysisService {
             if (num == null) num = 0;
             type_num.put("value", num);
             type_num.put("name", type.getType_name());
+            list.add(type_num);
+        }
+        return list;
+    }
+
+    public List<Map<String, Object>> getLineChart(String time0, String time1, String time2, String time3, String time4, String time5, String time6, String time7){
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<Type> types = typeMapper.findAll();
+        Integer num;
+        List<Integer> nums = new ArrayList<>();
+        for(int i=0; i< types.size(); i++){
+            Map<String, Object> type_num = new HashedMap();
+            Type type = types.get(i);
+            type_num.put("name", type.getType_name());
+
+            num = essayMapper.getAttendanceNumWithType(time0, time1, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time1, time2, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time2, time3, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time3, time4, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time4, time5, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time5, time6, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            num = essayMapper.getAttendanceNumWithType(time6, time7, type.getType_id());
+            if (num == null) num = 0;
+            nums.add(num);
+            type_num.put("data", nums);
             list.add(type_num);
         }
         return list;
