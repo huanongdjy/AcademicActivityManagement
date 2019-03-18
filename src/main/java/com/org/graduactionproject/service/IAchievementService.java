@@ -18,4 +18,5 @@ public interface IAchievementService {
     Integer updateAchievement(String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate, Integer id);
     Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate);
     Integer deleteAchievement(Integer id);
+    Integer updateToshow(String toshow, Integer id);
 }

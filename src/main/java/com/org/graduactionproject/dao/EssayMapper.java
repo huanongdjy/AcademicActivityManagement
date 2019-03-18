@@ -87,6 +87,9 @@ public interface EssayMapper {
     @Update("update essay set read_num = read_num + 1 where id=#{id}")
     int updateRead_num(@Param("id")int id);
 
+    @Update("update essay set toshow=#{toshow} where id=#{id}")
+    Integer updateToshow(@Param("toshow")Integer toshow, @Param("id")Integer id);
+
     @Delete("delete from essay where id=#{id}")
     Integer deleteEssay(@Param("id")Integer id);
 
@@ -137,12 +140,18 @@ public interface EssayMapper {
                         @Param("content")String content, @Param("fund")String fund,  @Param("organizer")String organizer,  @Param("planned_attendance")Integer planned_attendance,
                         @Param("ordering")Integer ordering, @Param("type_id")Integer type_id, @Param("id")Integer id);
 
-    @Select("select COUNT(*) from essay where time between #{begTime} and #{endTime}")
+    @Select("select COUNT(*) from essay where hold_time between #{begTime} and #{endTime}")
     Integer getHoldActivityNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 
-    @Select("select sum(actual_attendance) from essay where time between #{begTime} and #{endTime}")
+    @Select("select COUNT(*) from essay where hold_time between #{begTime} and #{endTime} and type_id=#{type_id}")
+    Integer getHoldActivityNumByType_id(@Param("begTime")String begTime, @Param("endTime")String endTime, @Param("type_id")Integer type_id);
+
+    @Select("select sum(actual_attendance) from essay where hold_time between #{begTime} and #{endTime}")
     Integer getAttendanceNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 
-    @Select("select sum(actual_attendance) from essay where time between #{begTime} and #{endTime} and type_id=#{type_id}")
+    @Select("select sum(actual_attendance) from essay where hold_time between #{begTime} and #{endTime} and type_id=#{type_id}")
     Integer getAttendanceNumWithType(@Param("begTime")String begTime, @Param("endTime")String endTime, @Param("type_id")Integer type_id);
+
+    @Select("select count(*) from essay where time between #{begTime} and #{endTime}and type_id=#{type_id}")
+    Integer getAddEssayNum(@Param("begTime")String begTime, @Param("endTime")String endTime, @Param("type_id")Integer type_id);
 }

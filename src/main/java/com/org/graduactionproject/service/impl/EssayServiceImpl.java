@@ -100,4 +100,12 @@ public class EssayServiceImpl implements IEssayService {
         return essayMapper.updateEssay(title, author, summary, time, hold_time, location,content,fund, organizer, planned_attendance
                     ,ordering,type_id,id);
     }
+
+    public Integer updateToshow(String toshow, Integer id){
+        int i = 1;
+        if ("false".equals(toshow)){
+            i = 2;
+        }
+        return essayMapper.updateToshow(i, id);
+    }
 }

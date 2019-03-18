@@ -51,14 +51,39 @@ public class AnalysisServiceImpl implements IAnalysisService {
         return num == null ? 0 : num;
     }
 
-    public List<Map<String, Object>> getPieData(String begTime, String endTime){
+    public List<Map<String, Object>> getEssayPieData(String begTime, String endTime){
         List<Map<String, Object>> list = new ArrayList<>();
         List<Type> types = typeMapper.findAll();
         for(int i=0; i< types.size(); i++){
+            Type type = types.get(i);
+            Map<String, Object> type_num = new HashedMap();
+            StringBuffer m = new StringBuffer();
+            Integer num;
+            num = essayMapper.getAddEssayNum(begTime, endTime,type.getType_id());
+            if (num == null) num = 0;
+            type_num.put("value", num); // 以新增活动为主显示
+
+            m.append("新增活动：<br/>类型"+ type.getType_name() + ": " + num + "<br/>");
+            num = essayMapper.getHoldActivityNumByType_id(begTime, endTime,type.getType_id());
+            if (num == null) num = 0;
+            m.append("举办活动数量：" + num + "<br/>");
+            num = essayMapper.getAttendanceNumWithType(begTime, endTime,type.getType_id());
+            if (num == null) num = 0;
+            m.append("参加活动人数：" + num );
+            type_num.put("tip", m);
+            type_num.put("name", type.getType_name());
+            list.add(type_num);
+        }
+        return list;
+    }
+
+    public List<Map<String, Object>> getAchievementPieData(String begTime, String endTime){
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<Type> types = typeMapper.findAll();
+        for(int i=0; i< types.size(); i++) {
             Map<String, Object> type_num = new HashedMap();
             Type type = types.get(i);
-            Integer num = essayMapper.getAttendanceNumWithType(begTime, endTime,type.getType_id());
-            if (num == null) num = 0;
+            Integer num = achievementMapper.getAddAchievementNumByType_id(begTime, endTime, type.getType_id());
             type_num.put("value", num);
             type_num.put("name", type.getType_name());
             list.add(type_num);

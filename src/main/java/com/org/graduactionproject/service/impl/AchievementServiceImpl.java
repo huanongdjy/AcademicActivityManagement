@@ -56,6 +56,13 @@ public class AchievementServiceImpl implements IAchievementService {
     }
 
     @Override
+    public Integer updateToshow(String toshow, Integer id){
+        int i = 1;
+        if (!"true".equals(toshow))
+            i = 2;
+        return achievementMapper.updateToshow(i, id);
+    }
+    @Override
     public Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate){
         Timestamp time = new Timestamp(System.currentTimeMillis());
         return achievementMapper.addAchievement(author, title, member, content, toshow, ordering, type_id, acquisitiondate, time);

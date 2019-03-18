@@ -166,4 +166,23 @@ public class EssayContraller {
         }
         return map;
     }
+
+    @RequestMapping(value = "/changeEssayToshow")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String,Object> changeEssayToshow( @RequestBody String data){
+        Map<String,Object> map = new HashedMap();
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        String toshow = jsonObject.getString("toshow");
+        Integer id = jsonObject.getInt("id");
+        Integer ret = essayService.updateToshow(toshow, id);
+        if(ret == null){
+            map.put("message", "修改失败");
+        }else {
+            map.put("message", "修改成功");
+        }
+
+        return map;
+    }
 }

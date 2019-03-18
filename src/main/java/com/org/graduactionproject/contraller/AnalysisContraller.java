@@ -54,17 +54,31 @@ public class AnalysisContraller {
         return map;
     }
 
-    @RequestMapping(value = "/getPieData")
+    @RequestMapping(value = "/getEssayPieData")
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public List<Map<String, Object>>  getPieData(@RequestBody String data){
+    public List<Map<String, Object>>  getEssayPieData(@RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
         JSONObject jsonObject = JSONObject.fromObject(data);
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
 
-        list = analysisService.getPieData(begTime,endTime);
+        list = analysisService.getEssayPieData(begTime,endTime);
+        return list;
+    }
+
+    @RequestMapping(value = "/getAchievementPieData")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public List<Map<String, Object>>  getAchievementPieData(@RequestBody String data){
+        List<Map<String, Object>> list = new ArrayList<>();
+        JSONObject jsonObject = JSONObject.fromObject(data);
+        String begTime = jsonObject.getString("begTime");
+        String endTime = jsonObject.getString("endTime");
+
+        list = analysisService.getAchievementPieData(begTime,endTime);
         return list;
     }
 

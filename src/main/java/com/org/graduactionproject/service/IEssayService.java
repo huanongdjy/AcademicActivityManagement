@@ -21,4 +21,5 @@ public interface IEssayService {
     Integer updateEssay(String title, String author, String summary, Timestamp hold_time, String location,
                         String content, String fund, String organizer, Integer planned_attendance,
                         Integer ordering, Integer type_id, Integer id);
+    Integer updateToshow(String toshow, Integer id);
 }
