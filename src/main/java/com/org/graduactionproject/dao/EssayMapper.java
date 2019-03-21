@@ -16,7 +16,7 @@ public interface EssayMapper {
             @Result(property = "id", column = "id"),
             @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Map<String, Object>> findEssayByTitle(@Param("title") String title);
@@ -39,7 +39,7 @@ public interface EssayMapper {
             @Result(property = "id", column = "id"),
             @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> findEssayByType_id(@Param("type_id")int type, @Param("hold_time")String hold_time);
@@ -59,7 +59,7 @@ public interface EssayMapper {
             @Result(property = "id", column = "id"),
             @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> findOldActivity(@Param("hold_time")String hold_time);
@@ -69,7 +69,7 @@ public interface EssayMapper {
             @Result(property = "id", column = "id"),
             @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> findNewActivity(@Param("hold_time")String hold_time);
@@ -79,7 +79,7 @@ public interface EssayMapper {
             @Result(property = "id", column = "id"),
             @Result(property = "photoList",
                     column = "id",
-                    javaType = Photo.class,
+                    javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.PhotoMapper.findEssayPhotoById", fetchType= FetchType.EAGER))})
     List<Essay> searchEssayByTitle(@Param("title")String title);

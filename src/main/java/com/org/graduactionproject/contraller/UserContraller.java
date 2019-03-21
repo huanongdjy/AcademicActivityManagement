@@ -137,7 +137,7 @@ public class UserContraller {
 
     @RequestMapping(value = "/logout")
     @UserLoginToken
-    public Map<String, Object> logout(HttpServletRequest httpServletRequest, @RequestBody String data){
+    public Map<String, Object> logout(HttpServletRequest httpServletRequest){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();//获取当前session
         if(session!=null){

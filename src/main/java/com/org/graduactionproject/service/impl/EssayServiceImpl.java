@@ -61,9 +61,9 @@ public class EssayServiceImpl implements IEssayService {
         String  curr_tinme = dateFormat.format(calendar.getTime());
         List<Essay> essays = null;
         if ("newactivity".equals(type_name)){
-            essays = essayMapper.findOldActivity(curr_tinme);
-        }else if("oldactivity".equals(type_name)){
             essays = essayMapper.findNewActivity(curr_tinme);
+        }else if("oldactivity".equals(type_name)){
+            essays = essayMapper.findOldActivity(curr_tinme);
         }else if("activity".equals(type_name)){
             essays = essayMapper.getAllEssays();
         }
