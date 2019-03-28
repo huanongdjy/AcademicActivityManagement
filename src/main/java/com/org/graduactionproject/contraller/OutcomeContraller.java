@@ -1,5 +1,6 @@
 package com.org.graduactionproject.contraller;
 
+import com.org.graduactionproject.domain.OutCome;
 import com.org.graduactionproject.service.IOutcomeService;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -35,6 +36,19 @@ public class OutcomeContraller {
             map.put("message", "新增总结失败");
             map.put("resultCode", 200);
         }
+        return map;
+    }
+
+    @RequestMapping(value = "/getOutcome")
+    @ResponseBody
+    @Transactional
+    public Map<String, Object> getOutcome(@RequestBody String data) {
+        Map<String,Object> map = new HashedMap();
+//        JSONObject jsonObject = JSONObject.fromObject(data);
+        Integer id = Integer.parseInt(data);
+        OutCome outCome = outcomeService.getOutcome(id);
+        map.put("outcome", outCome);
+        map.put("resultCode", 200);
         return map;
     }
 }
