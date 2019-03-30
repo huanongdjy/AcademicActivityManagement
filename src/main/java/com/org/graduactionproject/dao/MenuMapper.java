@@ -1,7 +1,6 @@
 package com.org.graduactionproject.dao;
 
 import com.org.graduactionproject.domain.Menu;
-import com.org.graduactionproject.token.PassToken;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
 import org.apache.ibatis.type.JdbcType;
@@ -21,4 +20,6 @@ public interface MenuMapper {
 
     @Select("select * from menu where parent_id = #{menu_id}")
     List<Menu> findMenuByMenu_id(@Param("menu_id") Integer menu_id);
+
+
 }
