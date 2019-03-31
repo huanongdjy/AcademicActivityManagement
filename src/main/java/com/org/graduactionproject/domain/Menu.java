@@ -8,7 +8,7 @@ public class Menu {
     private String name;
     private String access;
     private boolean hideInBread;
-    private Integer parentId;
+    private Integer parent_id;
     private String component;
     private String title;
     private String icon;
@@ -54,12 +54,12 @@ public class Menu {
         this.hideInBread = hideInBread;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public Integer getParent_id() {
+        return parent_id;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setParent_id(Integer parent_id) {
+        this.parent_id = parent_id;
     }
 
     public String getComponent() {

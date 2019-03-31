@@ -36,8 +36,12 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public Map<String, Object> updateAchievement(@RequestBody String data){
+    public Map<String, Object> updateAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+
         JSONObject jsonObject = JSONObject.fromObject(data);
         Integer id = Integer.parseInt(jsonObject.getString("id"));
         String title = jsonObject.getString("title");
@@ -61,7 +65,7 @@ public class AchievementContraller {
         String time = jsonObject.getString("time");
         Timestamp acquisitiondate = Timestamp.valueOf(date + " " + time);
 
-        Integer ret = achievementService.updateAchievement(title,member,content,toshow,ordering,type_id,acquisitiondate,id);
+        Integer ret = achievementService.updateAchievement(author, title,member,content,toshow,ordering,type_id,acquisitiondate,id);
         if(ret == 1){
             map.put("message", "更新成功");
             map.put("resultCode", 200);
@@ -79,8 +83,6 @@ public class AchievementContraller {
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
         String token = httpServletRequest.getHeader("Authorization");
-//        User user = (User)session.getAttribute("user");
-//        String author = user.getUsername();
         String author = JWT.decode(token).getAudience().get(0);
         JSONObject jsonObject = JSONObject.fromObject(data);
         String title = jsonObject.getString("title");
@@ -117,7 +119,7 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public Map<String, Object> deleteAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
+    public Map<String, Object> deleteAchievement( @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
         Integer ret1 = achievementService.deleteAchievement(id);
@@ -137,9 +139,13 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public Map<String,Object> searchaChievement( @RequestBody String data){
+    public Map<String,Object> searchaChievement(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
-        List<Achievement> achievements = achievementService.searchAchievementByTitle(data);
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+
+        List<Achievement> achievements = achievementService.searchAchievementByTitle(author, data);
         if (achievements != null){
             map.put("resultCode", 200);
             map.put("achievements", achievements);

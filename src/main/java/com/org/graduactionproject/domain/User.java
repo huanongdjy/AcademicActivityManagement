@@ -5,6 +5,7 @@ public class User {
     private String username;
     private Identity identity;
     private String mailbox;
+    private Integer college_id;
 
     public String getPassword() {
         return password;
@@ -36,6 +37,14 @@ public class User {
 
     public void setMailbox(String mailbox) {
         this.mailbox = mailbox;
+    }
+
+    public Integer getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Integer college_id) {
+        this.college_id = college_id;
     }
 
     @Override

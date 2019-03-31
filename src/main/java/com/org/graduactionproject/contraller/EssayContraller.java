@@ -61,7 +61,7 @@ public class EssayContraller {
         String time = jsonObject.getString("time");
         Timestamp hold_time = Timestamp.valueOf(date + " " + time);
 
-        Integer id = essayService.addEssay(title, author, summary, hold_time, location,content
+        Integer id = essayService.addEssay(author, title, author, summary, hold_time, location,content
                 , fund, organizer, planned_attendance, type_id);
 
         JSONArray jsonArray = jsonObject.getJSONArray("photoList");
@@ -85,9 +85,12 @@ public class EssayContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public Map<String,Object> searchEssays( @RequestBody String data){
+    public Map<String,Object> searchEssays( HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
-        List<Essay> essays = essayService.searchEssayByTitle(data);
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+        List<Essay> essays = essayService.searchEssayByTitle(author, data);
         if (essays != null){
             map.put("resultCode", 200);
             map.put("essays", essays);
@@ -147,7 +150,7 @@ public class EssayContraller {
         String time = jsonObject.getString("time");
         Timestamp hold_time = Timestamp.valueOf(date + " " + time);
 
-        Integer retId = essayService.updateEssay(title, author, summary, hold_time, location,content
+        Integer retId = essayService.updateEssay(author, title, author, summary, hold_time, location,content
                 , fund, organizer, planned_attendance, ordering, type_id, id);
 
         JSONArray jsonArray = jsonObject.getJSONArray("photoList");

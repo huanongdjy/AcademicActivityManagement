@@ -24,6 +24,7 @@ public class Essay {
     private int read_num;
     private boolean toshow;
     private List<Photo> photoList;
+    private Integer college_id;
 
     public int getId() {
         return id;
@@ -175,5 +176,13 @@ public class Essay {
 
     public void setPhotoList(List<Photo> photoList) {
         this.photoList = photoList;
+    }
+
+    public Integer getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Integer college_id) {
+        this.college_id = college_id;
     }
 }

@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService {
         int iden ;
         if("admin".equals(identity)){
             iden = 1;
-        }else if("sysamdin".equals(identity)){
+        }else if("sysadmin".equals(identity)){
             iden = 2;
         }else {
             return null;

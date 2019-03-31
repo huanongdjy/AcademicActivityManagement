@@ -16,6 +16,7 @@ public class Achievement {
     private Boolean toshow;
     private int type_id;
     private List<Photo> photoList;
+    private Integer college_id;
 
     public int getId() {
         return id;
@@ -111,5 +112,13 @@ public class Achievement {
 
     public void setPhotoList(List<Photo> photoList) {
         this.photoList = photoList;
+    }
+
+    public Integer getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Integer college_id) {
+        this.college_id = college_id;
     }
 }

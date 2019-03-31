@@ -30,15 +30,17 @@ public class SearchContraller {
     @PassToken
     public List<Map<String,Object>> search(@RequestBody String data){
         List<Map<String,Object>> list = new ArrayList<>();
+
+
         List<Map<String,Object>> result = null;
         JSONObject jsonObject = JSONObject.fromObject(data);
 
         String type = jsonObject.getString("type");
         String title = jsonObject.getString("title");
         if("activity".equals(type)){
-            result = essayService.findEssayByTitle(title);
+            result = essayService.findEssayByTitle(null, title);
         }else if("achievement".equals(type)){
-            result = achievementService.findAchievementByTitle(title);
+            result = achievementService.findAchievementByTitle(null, title);
         }
         if(result != null){
             Map<String,Object> map = new HashMap<>();

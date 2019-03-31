@@ -14,7 +14,24 @@ public class MenuServiceImpl implements IMenuService {
     MenuMapper menuMapper;
 
     @Override
-    public List<Menu> getAllMenus() {
-        return menuMapper.getAllMenu();
+    public List<Menu> getMenus() {
+        return menuMapper.getMenus();
     }
+
+    @Override
+    public Integer updateMenu(Integer menu_id, String title, String access) {
+        return menuMapper.updateMenu(menu_id, title, access);
+    }
+
+    @Override
+    public List<Menu> searchMenuByTile(String title) {
+        return menuMapper.searchMenuByTitle(title);
+    }
+
+    @Override
+    public List<Menu> getchilMenus() {
+        return menuMapper.getchilMenus();
+    }
+
+
 }

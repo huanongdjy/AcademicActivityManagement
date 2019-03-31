@@ -105,7 +105,7 @@ public class IdentityCotraller {
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
         String identity_name = jsonObject.getString("identity_name");
-        String caccess = jsonObject.getString("caccess");
+        String caccess = jsonObject.getString("access");
         int identity_id = jsonObject.getInt("identity_id");
         Integer ret = identityService.updateIdentity(identity_name, caccess, identity_id);
         if (ret!=null){

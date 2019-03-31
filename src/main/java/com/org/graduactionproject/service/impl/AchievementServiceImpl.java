@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.dao.AchievementMapper;
+import com.org.graduactionproject.dao.UserMapper;
 import com.org.graduactionproject.domain.Achievement;
+import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IAchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,23 +21,34 @@ public class AchievementServiceImpl implements IAchievementService {
     @Autowired
     AchievementMapper achievementMapper;
 
-    public Achievement findAchievementById(int id){
-        return achievementMapper.findAchievementById(id);
+    @Autowired
+    UserMapper userMapper;
+
+    public Achievement findAchievementById(String username, int id){
+        User user = userMapper.findUserByUserName(username);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.findAchievementById(id, college_id);
     }
 
-    public List<Achievement> findAll(){
-        return achievementMapper.findAll();
+    public List<Achievement> findAll(String username){
+        User user = userMapper.findUserByUserName(username);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.findAll(college_id);
     }
 
     @Override
-    public List<Map<String,Object>> findAchievementByTitle(String title) {
-        return achievementMapper.findAchievementByTitle(title);
+    public List<Map<String,Object>> findAchievementByTitle(String username,String title) {
+        User user = userMapper.findUserByUserName(username);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.findAchievementByTitle(title, college_id);
     }
 
-    public InfoPageJSONBean getInfoPage(int size, int page){
+    public InfoPageJSONBean getInfoPage(String username, int size, int page){
+        User user = userMapper.findUserByUserName(username);
+        Integer college_id = user.getCollege_id();
         //分页并查询
         PageHelper.startPage(page, size);
-        List<Achievement> achievements = achievementMapper.findAll();
+        List<Achievement> achievements = achievementMapper.findAll(college_id);
         PageInfo<Achievement> pageInfo = new PageInfo<>(achievements);
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
         InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
@@ -50,9 +63,11 @@ public class AchievementServiceImpl implements IAchievementService {
     }
 
     @Override
-    public Integer updateAchievement(String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate, Integer id){
+    public Integer updateAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate, Integer id){
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        return achievementMapper.updateAchievement(title,member,content,toshow,ordering,type_id,acquisitiondate,time,id);
+        User user = userMapper.findUserByUserName(author);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.updateAchievement(title,member,content,toshow,ordering,type_id,acquisitiondate,time,id, college_id);
     }
 
     @Override
@@ -65,7 +80,9 @@ public class AchievementServiceImpl implements IAchievementService {
     @Override
     public Integer addAchievement(String author, String title, String member, String content, boolean toshow, Integer ordering, Integer type_id, Timestamp acquisitiondate){
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        return achievementMapper.addAchievement(author, title, member, content, toshow, ordering, type_id, acquisitiondate, time);
+        User user = userMapper.findUserByUserName(author);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.addAchievement(author, title, member, content, toshow, ordering, type_id, acquisitiondate, time, college_id);
     }
 
     @Override
@@ -74,7 +91,9 @@ public class AchievementServiceImpl implements IAchievementService {
     }
 
     @Override
-    public List<Achievement> searchAchievementByTitle(String title){
-        return achievementMapper.searchAchievementByTitle(title);
+    public List<Achievement> searchAchievementByTitle(String username, String title){
+        User user = userMapper.findUserByUserName(username);
+        Integer college_id = user.getCollege_id();
+        return achievementMapper.searchAchievementByTitle(title, college_id);
     }
 }

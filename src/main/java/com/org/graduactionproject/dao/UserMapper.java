@@ -47,7 +47,7 @@ public interface UserMapper {
              })
     Integer updateUser(@Param("username")String username, @Param("identity_id")int identity_id, @Param("mailbox")String mailbox, @Param("password")String password);
 
-    @Select("select * from users")
+    @Select("select * from users ")
     @Results({
             @Result(property = "identity",
                     column = "identity_id",

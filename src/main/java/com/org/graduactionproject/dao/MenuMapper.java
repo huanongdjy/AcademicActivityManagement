@@ -16,10 +16,29 @@ public interface MenuMapper {
                     javaType = List.class,
                     jdbcType = JdbcType.INTEGER,
                     many = @Many(select ="com.org.graduactionproject.dao.MenuMapper.findMenuByMenu_id", fetchType= FetchType.EAGER))})
-    List<Menu> getAllMenu();
+    List<Menu> getMenus();
+
+    @Select("select * from menu where component  <> 'Main' order by orderIndex")
+    List<Menu> getchilMenus();
 
     @Select("select * from menu where parent_id = #{menu_id}")
     List<Menu> findMenuByMenu_id(@Param("menu_id") Integer menu_id);
 
+    @Update({"<script>",
+            "update menu",
+            "<set>",
+            "<if test='title!=null'>",
+            "title = #{title}, ",
+            "</if>",
+            "<if test='access!=null'>",
+            "access = #{access}, ",
+            "</if>",
+            "</set>",
+            "where menu_id = #{menu_id}",
+            "</script>"
+    })
+    Integer updateMenu(@Param("menu_id")Integer menu_id, @Param("title")String title, @Param("access")String access);
 
+    @Select("select * from menu where title like CONCAT('%', #{title},'%')")
+    List<Menu> searchMenuByTitle(@Param("title")String title);
 }

@@ -1,5 +1,6 @@
 package com.org.graduactionproject.contraller;
 
+import com.auth0.jwt.JWT;
 import com.org.graduactionproject.service.IAnalysisService;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,12 @@ public class AnalysisContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public Map<String, Object> getInforCardData(@RequestBody String data){
+    public Map<String, Object> getInforCardData(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+
         JSONObject jsonObject = JSONObject.fromObject(data);
         List<Integer> list = new ArrayList<>();
         String begTime = jsonObject.getString("begTime");
@@ -39,15 +46,15 @@ public class AnalysisContraller {
         Integer read_num = analysisService.getRangeReadNum(begTime, endTime);
         list.add(read_num);
         // 新增成果数量
-        Integer achievement_num = analysisService.getAddAchievementNum(begTime, endTime);
+        Integer achievement_num = analysisService.getAddAchievementNum(author, begTime, endTime);
         list.add(achievement_num);
 
         //举办活动数量
-        Integer hold_num = analysisService.getHoldActivityNum(begTime, endTime);
+        Integer hold_num = analysisService.getHoldActivityNum(author, begTime, endTime);
         list.add(hold_num);
 
         //参加活动人数
-        Integer attendance_num = analysisService.getAttendanceNum(begTime, endTime);
+        Integer attendance_num = analysisService.getAttendanceNum(author, begTime, endTime);
         list.add(attendance_num);
         map.put("list", list);
         map.put("resultCode", 200);
@@ -58,13 +65,16 @@ public class AnalysisContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public List<Map<String, Object>>  getEssayPieData(@RequestBody String data){
+    public List<Map<String, Object>>  getEssayPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
         JSONObject jsonObject = JSONObject.fromObject(data);
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
 
-        list = analysisService.getEssayPieData(begTime,endTime);
+        list = analysisService.getEssayPieData(author, begTime,endTime);
         return list;
     }
 
@@ -72,13 +82,17 @@ public class AnalysisContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public List<Map<String, Object>>  getAchievementPieData(@RequestBody String data){
+    public List<Map<String, Object>>  getAchievementPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+
         JSONObject jsonObject = JSONObject.fromObject(data);
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
 
-        list = analysisService.getAchievementPieData(begTime,endTime);
+        list = analysisService.getAchievementPieData(author, begTime,endTime);
         return list;
     }
 
@@ -86,8 +100,12 @@ public class AnalysisContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
-    public List<Map<String, Object>>  getLineChart(@RequestBody String data){
+    public List<Map<String, Object>>  getLineChart(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
+        HttpSession session = httpServletRequest.getSession();
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+
         JSONObject jsonObject = JSONObject.fromObject(data);
         String time0 = jsonObject.getString("time0");
         String time1 = jsonObject.getString("time1");
@@ -98,7 +116,7 @@ public class AnalysisContraller {
         String time6 = jsonObject.getString("time6");;
         String time7 = jsonObject.getString("time7");
 
-        list = analysisService.getLineChart(time0, time1,time2, time3, time4, time5, time6, time7);
+        list = analysisService.getLineChart(author, time0, time1,time2, time3, time4, time5, time6, time7);
         return list;
     }
 }
