@@ -2,6 +2,7 @@ package com.org.graduactionproject.contraller;
 
 import com.auth0.jwt.JWT;
 import com.org.graduactionproject.service.IAnalysisService;
+import com.org.graduactionproject.token.PassToken;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -31,7 +32,7 @@ public class AnalysisContraller {
     @RequestMapping(value = "/getInforCardData")
     @ResponseBody
     @Transactional
-    @UserLoginToken
+    @PassToken
     public Map<String, Object> getInforCardData(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
@@ -64,7 +65,7 @@ public class AnalysisContraller {
     @RequestMapping(value = "/getEssayPieData")
     @ResponseBody
     @Transactional
-    @UserLoginToken
+    @PassToken
     public List<Map<String, Object>>  getEssayPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
         HttpSession session = httpServletRequest.getSession();
@@ -81,7 +82,7 @@ public class AnalysisContraller {
     @RequestMapping(value = "/getAchievementPieData")
     @ResponseBody
     @Transactional
-    @UserLoginToken
+    @PassToken
     public List<Map<String, Object>>  getAchievementPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
         HttpSession session = httpServletRequest.getSession();
@@ -99,7 +100,7 @@ public class AnalysisContraller {
     @RequestMapping(value = "/getLineChart")
     @ResponseBody
     @Transactional
-    @UserLoginToken
+    @PassToken
     public List<Map<String, Object>>  getLineChart(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
         HttpSession session = httpServletRequest.getSession();
