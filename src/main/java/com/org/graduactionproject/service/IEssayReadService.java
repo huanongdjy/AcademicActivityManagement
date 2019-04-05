@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Param;
 public interface IEssayReadService {
     EssayRead findEssayReadByRead_id(int read_id);
     EssayRead getEssayReadByIpAndId(String ip, int id);
-    int addEssayRead(String ip, int id);
+    int addEssayRead(int id);
 }

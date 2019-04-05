@@ -38,14 +38,21 @@ public class AchievementServiceImpl implements IAchievementService {
 
     @Override
     public List<Map<String,Object>> findAchievementByTitle(String username,String title) {
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+        Integer college_id = null;
+        if (username != null){
+            User user = userMapper.findUserByUserName(username);
+            college_id = user.getCollege_id();
+        }
         return achievementMapper.findAchievementByTitle(title, college_id);
     }
 
     public InfoPageJSONBean getInfoPage(String username, int size, int page){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+        Integer college_id = null;
+        if (username!=null){
+            User user = userMapper.findUserByUserName(username);
+            college_id = user.getCollege_id();
+        }
+
         //分页并查询
         PageHelper.startPage(page, size);
         List<Achievement> achievements = achievementMapper.findAll(college_id);

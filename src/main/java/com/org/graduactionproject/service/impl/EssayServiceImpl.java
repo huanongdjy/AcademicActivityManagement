@@ -62,9 +62,11 @@ public class EssayServiceImpl implements IEssayService {
         return essayMapper.findEssayByType_id(type_id, curr_tinme, college_id);
     }
     public InfoPageJSONBean getInfoPage(String username, int size, int page, String type_name){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
-
+        Integer college_id = null;
+        if (username!=null&&"".equals(username)){
+            User user = userMapper.findUserByUserName(username);
+            college_id = user.getCollege_id();
+        }
         PageHelper.startPage(page, size);
         //先获取类型 type_id
 //        int type_id = typeMapper.findType_idByType_name(type_name);

@@ -15,10 +15,10 @@ public interface AchievementReadMapper {
     @Select("select * from achievementread where ip=#{ip} and id = #{id}")
     AchievementRead getAchievementReadByIpAndId(@Param("ip")String ip, @Param("id")int id);
 
-    @Insert("insert into achievementread(ip, id) values(#{ip}, #{id})")
+    @Insert("insert into achievementread(id, read_time) values( #{id}, #{read_time})")
     @Options(useGeneratedKeys = true, keyProperty = "read_id")
     int addAchievementRead(AchievementRead achievementRead);
 
-    @Select("select COUNT(*) from achievementread where read_time between #{begTime} and #{endTime}")
+    @Select("select COUNT(*) from achievementread where (read_time between #{begTime} and #{endTime})")
     Integer getRandAchievementNum(@Param("begTime")String begTime, @Param("endTime")String endTime);
 }

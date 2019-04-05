@@ -5,15 +5,13 @@ import java.sql.Timestamp;
 public class EssayRead {
     private int read_id;
     private int id;
-    private String ip;
-    private Timestamp time;
+    private Timestamp read_time;
     public EssayRead() {
     }
 
-    public EssayRead(int read_id, String ip, Timestamp time) {
+    public EssayRead(int read_id, Timestamp read_time) {
         this.read_id = read_id;
-        this.ip = ip;
-        this.time = time;
+        this.read_time = read_time;
     }
 
     public int getRead_id() {
@@ -32,11 +30,11 @@ public class EssayRead {
         this.id = id;
     }
 
-    public String getIp() {
-        return ip;
+    public Timestamp getRead_time() {
+        return read_time;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setRead_time(Timestamp read_time) {
+        this.read_time = read_time;
     }
 }

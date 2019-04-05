@@ -25,9 +25,9 @@ public class EssayReadServiceImpl implements IEssayReadService {
         EssayRead essayread = essayReadMapper.getEssayReadByIpAndId(ip, id);
         return essayread;
     }
-    public int addEssayRead(String ip, int id){
+    public int addEssayRead(int id){
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        EssayRead essayread = new EssayRead(id, ip, time);
+        EssayRead essayread = new EssayRead(id, time);
        return essayReadMapper.addReaded(essayread);
     }
 

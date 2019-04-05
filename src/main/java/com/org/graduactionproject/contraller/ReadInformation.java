@@ -48,20 +48,20 @@ public class ReadInformation {
         int id = jsonObject.getInt("id");
         String  type = jsonObject.getString("type");
         // 查询read表中该文章，该ip是否存在
-        String ip = ReadInformation.getIpAddr(request);
+//        String ip = ReadInformation.getIpAddr(request);
 //        Readed read = readService.getReadByIpAndRead_id(ip, id);
         if("achievements".equals(type)){
-            AchievementRead achievementRead = achievementReadService.getEssayReadByIpAndId(ip, id);
-            if(achievementRead == null){
+//            AchievementRead achievementRead = achievementReadService.getEssayReadByIpAndId(ip, id);
+//            if(achievementRead == null){
                 achievementService.updateRead_num(id);
-                achievementReadService.addAchievement(ip,id);
-            }
+                achievementReadService.addAchievement(id);
+//            }
         }else if("newactivity".equals(type) || "oldactivity".equals(type)){
-            EssayRead essayRead = essayreadService.getEssayReadByIpAndId(ip, id);
-            if(essayRead == null){
+//            EssayRead essayRead = essayreadService.getEssayReadByIpAndId(ip, id);
+//            if(essayRead == null){
                 essayService.updateRead_num(id);
-                essayreadService.addEssayRead(ip,id);
-            }
+                essayreadService.addEssayRead(id);
+//            }
         }
 
     }

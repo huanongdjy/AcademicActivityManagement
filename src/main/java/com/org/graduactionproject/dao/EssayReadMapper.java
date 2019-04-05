@@ -15,7 +15,7 @@ public interface EssayReadMapper {
     @Select("select * from essayread where ip=#{ip} and id = #{id}")
     EssayRead getEssayReadByIpAndId(@Param("ip")String ip, @Param("id")int id);
 
-    @Insert("insert into essayread(ip, id) values(#{ip}, #{id})")
+    @Insert("insert into essayread(id, read_time) values(#{id}, #{read_time})")
     @Options(useGeneratedKeys = true, keyProperty = "read_id")
     Integer addReaded(EssayRead essayread);
 

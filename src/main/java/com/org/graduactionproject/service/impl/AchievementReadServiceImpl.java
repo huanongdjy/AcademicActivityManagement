@@ -22,9 +22,9 @@ public class AchievementReadServiceImpl implements IAchievementReadService {
         AchievementRead achievementRead = achievementReadMapper.getAchievementReadByIpAndId(ip, id);
         return achievementRead;
     }
-    public int addAchievement(String ip, int id){
+    public int addAchievement(int id){
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        AchievementRead achievementRead = new AchievementRead(id, ip, time);
+        AchievementRead achievementRead = new AchievementRead(id, time);
         return achievementReadMapper.addAchievementRead(achievementRead);
     }
 }

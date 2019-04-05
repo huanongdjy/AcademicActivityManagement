@@ -35,7 +35,9 @@ public class InformationContraller {
     public InfoPageJSONBean getInformationWithPage(HttpServletRequest httpServletRequest, @RequestBody String data){
         HttpSession session = httpServletRequest.getSession();
         String token = httpServletRequest.getHeader("Authorization");
-        String author = JWT.decode(token).getAudience().get(0);
+        String author = null;
+        if (token != null)
+            author = JWT.decode(token).getAudience().get(0);
 
         JSONObject jsonObject = JSONObject.fromObject(data);
         int page = jsonObject.getInt("currentPage");

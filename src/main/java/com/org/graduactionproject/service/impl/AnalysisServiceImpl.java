@@ -73,7 +73,9 @@ public class AnalysisServiceImpl implements IAnalysisService {
             StringBuffer m = new StringBuffer();
             Integer num;
             num = essayMapper.getAddEssayNum(begTime, endTime,type.getType_id(), college_id);
-            if (num == null) num = 0;
+            if (num == null || num == 0) {
+                continue;
+            }
             type_num.put("value", num); // 以新增活动为主显示
 
             m.append("新增活动：<br/>类型"+ type.getType_name() + ": " + num + "<br/>");
@@ -99,6 +101,9 @@ public class AnalysisServiceImpl implements IAnalysisService {
             Map<String, Object> type_num = new HashedMap();
             Type type = types.get(i);
             Integer num = achievementMapper.getAddAchievementNumByType_id(begTime, endTime, type.getType_id(), college_id);
+            if (num == null || num == 0) {
+                continue;
+            }
             type_num.put("value", num);
             type_num.put("name", type.getType_name());
             list.add(type_num);
