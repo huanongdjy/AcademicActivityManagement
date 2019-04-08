@@ -21,6 +21,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    AccessService accessService;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
         String token = httpServletRequest.getHeader("Authorization");// 从 http 请求头中取出 token
@@ -62,6 +65,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     jwtVerifier.verify(token);
                 } catch (JWTVerificationException e) {
                     throw new RuntimeException("401");
+                }
+
+                if(!(accessService.verifyAccess(user,method.getName()))){
+                    throw new RuntimeException("没有权限进行此操作");
                 }
                 return true;
             }
