@@ -41,4 +41,7 @@ public interface MenuMapper {
 
     @Select("select * from menu where title like CONCAT('%', #{title},'%')")
     List<Menu> searchMenuByTitle(@Param("title")String title);
+
+    @Select("select * from menu where classname=#{className}")
+    Menu getMenuByClassName(@Param("className") String className);
 }

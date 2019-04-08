@@ -33,5 +33,8 @@ public class MenuServiceImpl implements IMenuService {
         return menuMapper.getchilMenus();
     }
 
-
+    @Override
+    public Menu getMenuByClassName(String className){
+        return menuMapper.getMenuByClassName(className);
+    }
 }

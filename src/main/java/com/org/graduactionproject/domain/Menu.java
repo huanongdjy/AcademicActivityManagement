@@ -12,6 +12,7 @@ public class Menu {
     private String component;
     private String title;
     private String icon;
+    private String classname;
     private List<Menu> children;
 
     public Integer getMenu_id() {
@@ -84,6 +85,14 @@ public class Menu {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
     }
 
     public List<Menu> getChildren() {

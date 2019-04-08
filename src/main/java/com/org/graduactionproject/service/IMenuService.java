@@ -9,4 +9,5 @@ public interface IMenuService {
     Integer updateMenu(Integer menu_id, String title, String access);
     List<Menu> searchMenuByTile(String title);
     List<Menu> getchilMenus();
+    Menu getMenuByClassName(String className);
 }
