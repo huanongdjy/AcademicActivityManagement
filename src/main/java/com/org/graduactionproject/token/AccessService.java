@@ -20,7 +20,7 @@ public class AccessService{
         int len = useraccesses.length;
         for (int i = 0; i<len; i++){
             String temp = useraccesses[i];
-            if(temp.equals(menu.getMenu_id())){
+            if(temp.equals(menu.getMenu_id().toString())){
                 return true;
             }
         }

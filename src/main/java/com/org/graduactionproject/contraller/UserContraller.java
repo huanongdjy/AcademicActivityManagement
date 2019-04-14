@@ -53,6 +53,7 @@ public class UserContraller {
     @RequestMapping(value = "/getUserInfo")
     @ResponseBody
     @UserLoginToken
+    @PassToken
     public Map<String,Object> getUserInfo(HttpServletRequest httpServletRequest, @RequestBody String data) {
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
