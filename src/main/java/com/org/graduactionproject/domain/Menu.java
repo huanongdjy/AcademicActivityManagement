@@ -14,6 +14,7 @@ public class Menu {
     private String icon;
     private String classname;
     private List<Menu> children;
+    private String label;
 
     public Integer getMenu_id() {
         return menu_id;
@@ -101,5 +102,13 @@ public class Menu {
 
     public void setChildren(List<Menu> children) {
         this.children = children;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

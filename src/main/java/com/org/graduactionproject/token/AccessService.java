@@ -16,6 +16,7 @@ public class AccessService{
     public boolean verifyAccess(User user, String classname){
         Menu menu = menuService.getMenuByClassName(classname);
         String useraccess = user.getIdentity().getAccess();
+        useraccess = useraccess.substring(1, useraccess.length()-1);
         String[] useraccesses = useraccess.split(",");
         int len = useraccesses.length;
         for (int i = 0; i<len; i++){
