@@ -6,6 +6,7 @@ import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
 import com.org.graduactionproject.token.CreatToken;
+import com.org.graduactionproject.token.PassAccess;
 import com.org.graduactionproject.token.PassToken;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
@@ -138,6 +139,7 @@ public class UserContraller {
 
     @RequestMapping(value = "/logout")
     @UserLoginToken
+    @PassAccess
     public Map<String, Object> logout(HttpServletRequest httpServletRequest){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();//获取当前session

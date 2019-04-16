@@ -67,8 +67,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new RuntimeException("401");
                 }
 
-                if(!(accessService.verifyAccess(user,method.getDeclaringClass().getName()))){
-                    throw new RuntimeException("没有权限进行此操作");
+                //该方法是否需要进行权限验证
+                if (method.isAnnotationPresent(Access.class)) {
+                    if(!(accessService.verifyAccess(user,method.getDeclaringClass().getName()))){
+                        throw new RuntimeException("没有权限进行此操作");
+                    }
                 }
                 return true;
             }
