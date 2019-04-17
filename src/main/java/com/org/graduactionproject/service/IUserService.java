@@ -6,7 +6,7 @@ import com.org.graduactionproject.domain.User;
 import java.util.Map;
 
 public interface IUserService {
-    Map<String,Object> login(String username, String password, String identity);
+    Map<String,Object> login(String username, String password);
     User findUserByUserName(String username);
     Integer updateUser(String username, int identity, String mailbox, String password);
     public InfoPageJSONBean getInfoPage(int size, int page);

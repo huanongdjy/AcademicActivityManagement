@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.Type;
 import com.org.graduactionproject.service.ITypeService;
+import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -58,6 +59,7 @@ public class TypeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> addType(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -77,6 +79,7 @@ public class TypeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> deleteType(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
@@ -95,6 +98,7 @@ public class TypeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> updateType(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);

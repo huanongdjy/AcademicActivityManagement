@@ -8,14 +8,14 @@ import org.apache.ibatis.type.JdbcType;
 import java.util.List;
 
 public interface UserMapper {
-    @Select("select * from users where username = #{username} and identity_id = #{identity_id}")
+    @Select("select * from users where username = #{username}")
             @Results({
                 @Result(property = "identity",
                 column = "identity_id",
                 javaType = Identity.class,
                 jdbcType = JdbcType.INTEGER,
                 one = @One(select ="com.org.graduactionproject.dao.IdentityMapper.findIdentityByIdentity"))})
-    User findWithLoginNameAndIdentity(@Param("username") String username, @Param("identity_id") int identity_id);
+    User findWithLoginNameAndIdentity(@Param("username") String username);
 
     @Select("select * from users where username=#{username}")
     @Results({

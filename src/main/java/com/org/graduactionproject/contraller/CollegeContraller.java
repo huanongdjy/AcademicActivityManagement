@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.College;
 import com.org.graduactionproject.service.ICollegeService;
+import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -58,6 +59,7 @@ public class CollegeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> addCollege(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -83,6 +85,7 @@ public class CollegeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> deleteCollege(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
@@ -101,6 +104,7 @@ public class CollegeContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> updateCollege(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);

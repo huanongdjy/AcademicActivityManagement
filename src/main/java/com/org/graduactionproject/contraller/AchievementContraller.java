@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.org.graduactionproject.domain.Achievement;
 import com.org.graduactionproject.service.IAchievementService;
 import com.org.graduactionproject.service.IPhotoService;
+import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -36,6 +37,7 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> updateAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
@@ -79,6 +81,7 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> addAchievement(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
@@ -119,6 +122,7 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> deleteAchievement( @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
@@ -157,6 +161,7 @@ public class AchievementContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String,Object> changeAchievementToshow( @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);

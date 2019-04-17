@@ -35,27 +35,28 @@ public class AnalysisContraller {
     @PassToken
     public Map<String, Object> getInforCardData(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
-        HttpSession session = httpServletRequest.getSession();
-        String token = httpServletRequest.getHeader("Authorization");
-        String author = JWT.decode(token).getAudience().get(0);
+//        String token = httpServletRequest.getHeader("Authorization");
+//        String author = JWT.decode(token).getAudience().get(0);
 
         JSONObject jsonObject = JSONObject.fromObject(data);
         List<Integer> list = new ArrayList<>();
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
+        String college_id = jsonObject.getString("college_id");
+        Integer co_id = Integer.parseInt(college_id);
         // 获取阅读量
         Integer read_num = analysisService.getRangeReadNum(begTime, endTime);
         list.add(read_num);
         // 新增成果数量
-        Integer achievement_num = analysisService.getAddAchievementNum(author, begTime, endTime);
+        Integer achievement_num = analysisService.getAddAchievementNum(co_id, begTime, endTime);
         list.add(achievement_num);
 
         //举办活动数量
-        Integer hold_num = analysisService.getHoldActivityNum(author, begTime, endTime);
+        Integer hold_num = analysisService.getHoldActivityNum(co_id, begTime, endTime);
         list.add(hold_num);
 
         //参加活动人数
-        Integer attendance_num = analysisService.getAttendanceNum(author, begTime, endTime);
+        Integer attendance_num = analysisService.getAttendanceNum(co_id, begTime, endTime);
         list.add(attendance_num);
         map.put("list", list);
         map.put("resultCode", 200);
@@ -68,14 +69,12 @@ public class AnalysisContraller {
     @PassToken
     public List<Map<String, Object>>  getEssayPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
-        HttpSession session = httpServletRequest.getSession();
-        String token = httpServletRequest.getHeader("Authorization");
-        String author = JWT.decode(token).getAudience().get(0);
         JSONObject jsonObject = JSONObject.fromObject(data);
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
-
-        list = analysisService.getEssayPieData(author, begTime,endTime);
+        String college_id = jsonObject.getString("college_id");
+        Integer co_id = Integer.parseInt(college_id);
+        list = analysisService.getEssayPieData(co_id, begTime,endTime);
         return list;
     }
 
@@ -85,15 +84,13 @@ public class AnalysisContraller {
     @PassToken
     public List<Map<String, Object>>  getAchievementPieData(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
-        HttpSession session = httpServletRequest.getSession();
-        String token = httpServletRequest.getHeader("Authorization");
-        String author = JWT.decode(token).getAudience().get(0);
 
         JSONObject jsonObject = JSONObject.fromObject(data);
         String begTime = jsonObject.getString("begTime");
         String endTime = jsonObject.getString("endTime");
-
-        list = analysisService.getAchievementPieData(author, begTime,endTime);
+        String college_id = jsonObject.getString("college_id");
+        Integer co_id = Integer.parseInt(college_id);
+        list = analysisService.getAchievementPieData(co_id, begTime,endTime);
         return list;
     }
 
@@ -103,9 +100,6 @@ public class AnalysisContraller {
     @PassToken
     public List<Map<String, Object>>  getLineChart(HttpServletRequest httpServletRequest, @RequestBody String data){
         List<Map<String, Object>> list = new ArrayList<>();
-        HttpSession session = httpServletRequest.getSession();
-        String token = httpServletRequest.getHeader("Authorization");
-        String author = JWT.decode(token).getAudience().get(0);
 
         JSONObject jsonObject = JSONObject.fromObject(data);
         String time0 = jsonObject.getString("time0");
@@ -116,8 +110,8 @@ public class AnalysisContraller {
         String time5 = jsonObject.getString("time5");;
         String time6 = jsonObject.getString("time6");;
         String time7 = jsonObject.getString("time7");
-
-        list = analysisService.getLineChart(author, time0, time1,time2, time3, time4, time5, time6, time7);
+        Integer college_id = jsonObject.getInt("college_id");
+        list = analysisService.getLineChart(college_id, time0, time1,time2, time3, time4, time5, time6, time7);
         return list;
     }
 }

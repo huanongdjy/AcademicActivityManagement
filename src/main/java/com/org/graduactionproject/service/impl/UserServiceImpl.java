@@ -19,16 +19,16 @@ public class UserServiceImpl implements IUserService {
     private UserMapper userMapper;
 
     @Override
-    public Map<String,Object> login(String username, String password, String identity){
-        int iden ;
+    public Map<String,Object> login(String username, String password){
+        /*int iden ;
         if("admin".equals(identity)){
             iden = 1;
         }else if("sysadmin".equals(identity)){
             iden = 2;
         }else {
             return null;
-        }
-        User user =  userMapper.findWithLoginNameAndIdentity(username, iden);
+        }*/
+        User user =  userMapper.findWithLoginNameAndIdentity(username);
         Map<String, Object> map = new HashedMap();
         if(user!=null){
             if(user.getPassword().equals(password)){

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.Identity;
 import com.org.graduactionproject.service.IIdentityService;
+import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
@@ -58,6 +59,7 @@ public class IdentityCotraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> addIdentity(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -83,6 +85,7 @@ public class IdentityCotraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> deleteIdentity(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
@@ -101,6 +104,7 @@ public class IdentityCotraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> updateIdentity(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);

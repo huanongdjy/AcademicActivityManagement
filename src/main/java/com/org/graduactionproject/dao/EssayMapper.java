@@ -13,7 +13,7 @@ import java.util.Map;
 public interface EssayMapper {
     @Select("<script>" +
             "select * from Essay where title like CONCAT('%', #{title},'%')"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -41,7 +41,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select * from essay where type_id=#{type_id} and hold_time >= #{hold_time}"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -56,7 +56,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select * from essay "
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -71,7 +71,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select * from essay where hold_time<![CDATA[<=]]> #{hold_time}" // 小于号
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -86,7 +86,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select * from essay where hold_time > #{hold_time}"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -101,7 +101,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select * from essay where title like CONCAT('%', #{title},'%') "
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             + "order by time"
@@ -176,7 +176,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select COUNT(*) from essay where (hold_time between #{begTime} and #{endTime})"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -184,7 +184,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select COUNT(*) from essay where (hold_time between #{begTime} and #{endTime} and type_id=#{type_id})"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -192,7 +192,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select sum(actual_attendance) from essay where (hold_time between #{begTime} and #{endTime})"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -200,7 +200,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select sum(actual_attendance) from essay where (hold_time between #{begTime} and #{endTime} and type_id=#{type_id})"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -208,7 +208,7 @@ public interface EssayMapper {
 
     @Select("<script>" +
             "select count(*) from essay where (time between #{begTime} and #{endTime})and type_id=#{type_id}"
-            + "<when test='college_id!=null'>"
+            + "<when test='college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")

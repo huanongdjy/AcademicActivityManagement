@@ -5,6 +5,7 @@ import com.org.graduactionproject.domain.Achievement;
 import com.org.graduactionproject.domain.Essay;
 import com.org.graduactionproject.service.IEssayService;
 import com.org.graduactionproject.service.IPhotoService;
+import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -37,6 +38,7 @@ public class EssayContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> addEssay(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         HttpSession session = httpServletRequest.getSession();
@@ -103,6 +105,7 @@ public class EssayContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String,Object> deleteEssay( @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer id = Integer.parseInt(data);
@@ -123,6 +126,7 @@ public class EssayContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String, Object> updateEssay(HttpServletRequest httpServletRequest, @RequestBody String data){
         Map<String,Object> map = new HashedMap();
 //        JSONObject jsonObject = JSONObject.fromObject(data);
@@ -174,6 +178,7 @@ public class EssayContraller {
     @ResponseBody
     @Transactional
     @UserLoginToken
+    @Access
     public Map<String,Object> changeEssayToshow( @RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);

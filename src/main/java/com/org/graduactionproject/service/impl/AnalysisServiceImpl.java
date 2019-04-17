@@ -40,30 +40,30 @@ public class AnalysisServiceImpl implements IAnalysisService {
         return ac_num + es_num;
     }
 
-    public Integer getAddAchievementNum(String username, String begTime, String endTime){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public Integer getAddAchievementNum(Integer college_id,  String begTime, String endTime){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
         Integer num = achievementMapper.getAddAchievementNum(begTime, endTime, college_id);
         return num == null ? 0 : num  ;
     }
 
-    public Integer getHoldActivityNum(String username,String begTime, String endTime){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public Integer getHoldActivityNum(Integer college_id, String begTime, String endTime){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
         Integer num = essayMapper.getHoldActivityNum(begTime, endTime, college_id);
         return num == null ? 0 : num;
     }
 
-    public Integer getAttendanceNum(String username, String begTime, String endTime){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public Integer getAttendanceNum(Integer college_id, String begTime, String endTime){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
         Integer num = essayMapper.getAttendanceNum(begTime, endTime, college_id);
         return num == null ? 0 : num;
     }
 
-    public List<Map<String, Object>> getEssayPieData(String username, String begTime, String endTime){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public List<Map<String, Object>> getEssayPieData(Integer college_id,  String begTime, String endTime){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
 
         List<Map<String, Object>> list = new ArrayList<>();
         List<Type> types = typeMapper.findAll();
@@ -92,9 +92,9 @@ public class AnalysisServiceImpl implements IAnalysisService {
         return list;
     }
 
-    public List<Map<String, Object>> getAchievementPieData(String username, String begTime, String endTime){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public List<Map<String, Object>> getAchievementPieData(Integer college_id, String begTime, String endTime){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
         List<Map<String, Object>> list = new ArrayList<>();
         List<Type> types = typeMapper.findAll();
         for(int i=0; i< types.size(); i++) {
@@ -111,9 +111,9 @@ public class AnalysisServiceImpl implements IAnalysisService {
         return list;
     }
 
-    public List<Map<String, Object>> getLineChart(String username, String time0, String time1, String time2, String time3, String time4, String time5, String time6, String time7){
-        User user = userMapper.findUserByUserName(username);
-        Integer college_id = user.getCollege_id();
+    public List<Map<String, Object>> getLineChart(Integer college_id, String time0, String time1, String time2, String time3, String time4, String time5, String time6, String time7){
+//        User user = userMapper.findUserByUserName(username);
+//        Integer college_id = user.getCollege_id();
         List<Map<String, Object>> list = new ArrayList<>();
         List<Type> types = typeMapper.findAll();
         Integer num;

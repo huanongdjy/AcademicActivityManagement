@@ -5,10 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
-import com.org.graduactionproject.token.CreatToken;
-import com.org.graduactionproject.token.PassAccess;
-import com.org.graduactionproject.token.PassToken;
-import com.org.graduactionproject.token.UserLoginToken;
+import com.org.graduactionproject.token.*;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +34,8 @@ public class UserContraller {
         JSONObject jsonObject = JSONObject.fromObject(data);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
-        String identity = jsonObject.getString("identity");
-        Map<String,Object> map = userService.login(username, password, identity);
+//        String identity = jsonObject.getString("identity");
+        Map<String,Object> map = userService.login(username, password);
         if(map.get("user")==null){
             map.put("message", "用户不存在");
             return map;
@@ -69,6 +66,7 @@ public class UserContraller {
     @RequestMapping(value = "/updateUser")
     @UserLoginToken
     @Transactional
+    @Access
     public Map<String,Object> updateUser(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -99,6 +97,7 @@ public class UserContraller {
 
     @RequestMapping(value = "/addUser")
     @UserLoginToken
+    @Access
     public Map<String,Object> addUser(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         JSONObject jsonObject = JSONObject.fromObject(data);
@@ -127,6 +126,7 @@ public class UserContraller {
 
     @RequestMapping(value = "/deleteUser")
     @UserLoginToken
+    @Access
     public Map<String, Object> deleteUser(@RequestBody String data){
         Map<String,Object> map = new HashedMap();
         Integer issuccess = userService.deleteUser(data);
