@@ -1,0 +1,2 @@
+webpackJsonp([0],{bxER:function(e,t,g){"use strict";t.a=function(e,t){/(y+)/.test(t)&&(t=t.replace(RegExp.$1,(e.getFullYear()+"").substr(4-RegExp.$1.length)));let g={"M+":e.getMonth()+1,"d+":e.getDate(),"h+":e.getHours(),"m+":e.getMinutes(),"s+":e.getSeconds()};for(let e in g)if(new RegExp(`(${e})`).test(t)){let n=g[e]+"";t=t.replace(RegExp.$1,1===RegExp.$1.length?n:("00"+(n=n)).substr(n.length))}var n;return t}}});
+//# sourceMappingURL=0.a62e1832b7c5146507b2.js.map
