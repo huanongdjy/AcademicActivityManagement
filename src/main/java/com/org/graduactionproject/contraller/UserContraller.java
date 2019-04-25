@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserContraller {
@@ -39,7 +41,7 @@ public class UserContraller {
 //        String identity = jsonObject.getString("identity");
         Map<String,Object> map = userService.login(username, password);
         if(map.get("user")==null){
-            map.put("message", "用户不存在");
+            map.put("message", "用户名称/密码错误");
             return map;
         }
         HttpSession sessoin=httpServletRequest.getSession();
@@ -91,11 +93,24 @@ public class UserContraller {
     @RequestMapping(value = "/getUsers")
     @ResponseBody
     @UserLoginToken
-    public InfoPageJSONBean getUsers(@RequestBody String data){
+    public InfoPageJSONBean getUsers(HttpServletRequest httpServletRequest, @RequestBody String data){
         JSONObject jsonObject = JSONObject.fromObject(data);
         int page = jsonObject.getInt("currentPage");
         int size = jsonObject.getInt("pageSize");
-        return userService.getInfoPage(size, page);
+
+        String token = httpServletRequest.getHeader("Authorization");
+        String username = JWT.decode(token).getAudience().get(0);
+        User user = userService.findUserByUserName(username);
+
+        InfoPageJSONBean infoPageJSONBean = userService.getInfoPage(size, page);
+        List<User> list = infoPageJSONBean.getPage().getList();
+        list = list.stream()
+                .filter(item -> item.getCollege_id() != 0)
+                .filter(item -> item.getCollege_id() == user.getCollege_id() )
+                .filter(item -> !item.getUsername().equals(username))
+                .collect(Collectors.toList());
+        infoPageJSONBean.getPage().setList(list);
+        return infoPageJSONBean;
     }
 
     @RequestMapping(value = "/addUser")

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -68,6 +69,7 @@ public class UserServiceImpl implements IUserService {
         InfoPageJSONBean infoPageJSONBean = new InfoPageJSONBean();
         infoPageJSONBean.setPage(pageInfo);
         infoPageJSONBean.setResultCode("200");
+
         return infoPageJSONBean;
     }
 

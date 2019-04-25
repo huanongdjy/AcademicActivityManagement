@@ -63,7 +63,7 @@ public class EssayServiceImpl implements IEssayService {
     }
     public InfoPageJSONBean getInfoPage(String username, int size, int page, String type_name){
         Integer college_id = null;
-        if (username!=null&&"".equals(username)){
+        if (username!=null&&!"".equals(username)){
             User user = userMapper.findUserByUserName(username);
             college_id = user.getCollege_id();
         }

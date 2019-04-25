@@ -35,10 +35,11 @@ public interface AchievementMapper {
                        @Param("type_id")Integer type_id, @Param("acquisitiondate")Timestamp acquisitiondate, @Param("time")Timestamp time,@Param("college_id")Integer college_id);
 
     @Select("<script>" +
-            "select * from achievement order by acquisitiondate"
+            "select * from achievement where 1=1"
              + "<when test='college_id!=0'>"
              + "and college_id=#{college_id}"
              + "</when>"
+             + "order by acquisitiondate"
              +"</script>")
     @Results({
             @Result(property = "id", column = "id"),
