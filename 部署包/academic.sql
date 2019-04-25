@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50722
 File Encoding         : 65001
 
-Date: 2019-04-21 21:53:18
+Date: 2019-04-22 20:38:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -210,7 +210,7 @@ CREATE TABLE `identity` (
 -- Records of identity
 -- ----------------------------
 INSERT INTO `identity` VALUES ('1', '[1,5]', '普通管理员');
-INSERT INTO `identity` VALUES ('2', '[5,7,9,12,14]', '系统管理员');
+INSERT INTO `identity` VALUES ('2', '[1,5,7,9,12,14]', '系统管理员');
 
 -- ----------------------------
 -- Table structure for menu
@@ -309,5 +309,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('admin', '2', 'admin123', '123@qq.com', '0');
-INSERT INTO `users` VALUES ('dd', '1', '123', '12@qq.com', '1');
+INSERT INTO `users` VALUES ('admin', '2', '0192023a7bbd73250516f069df18b500', '123@qq.com', '0');
+INSERT INTO `users` VALUES ('dd', '1', '202cb962ac59075b964b07152d234b70', '12@qq.com', '1');

@@ -3,6 +3,7 @@ package com.org.graduactionproject.contraller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
+import com.org.graduactionproject.commons.MyMD5;
 import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IUserService;
 import com.org.graduactionproject.token.*;
@@ -34,6 +35,7 @@ public class UserContraller {
         JSONObject jsonObject = JSONObject.fromObject(data);
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+        password = MyMD5.md5(password);
 //        String identity = jsonObject.getString("identity");
         Map<String,Object> map = userService.login(username, password);
         if(map.get("user")==null){
@@ -75,6 +77,7 @@ public class UserContraller {
         int identity = Integer.parseInt(jsonObject.getString("identity"));
         String mailbox = jsonObject.getString("mailbox");
         String password = jsonObject.getString("password");
+        password = MyMD5.md5(password);
 //        String access = jsonObject.getString("access");
         int i = userService.updateUser(userName,identity,mailbox,password);
         if(i == 1){
@@ -104,6 +107,7 @@ public class UserContraller {
         int identity_id = Integer.parseInt(jsonObject.getString("identity"));
         String user_name = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+        password = MyMD5.md5(password);
         String mailbox = jsonObject.getString("mailbox");
         int i = userService.addUser(user_name, password, identity_id, mailbox);
         if(i == 1){

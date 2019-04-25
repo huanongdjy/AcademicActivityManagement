@@ -1,0 +1,24 @@
+基于Linux环境下
+
+运行sql文件
+	1、进入MySQL：mysql -u 用户名 -p
+	2、新建名为academic的数据库
+	3、输入 mysql> use academic;
+	4、输入 mysql> source academic.sql;
+
+
+部署后台代码graduactionproject-0.0.1-SNAPSHOT.jar
+	1、将graduactionproject-0.0.1-SNAPSHOT.jar打开，修改BOOT-INF\classes下的application.properties文件中spring.datasource.url、spring.datasource.username、spring.datasource.password、server.port等字段的配置信息。
+	2、将jar放到服务器上，运行jar包。如在Linux环境下，运行命令：nohup java -jar graduactionproject-0.0.1-SNAPSHOT.jar &
+	管理员账号/密码：admin/admin123
+
+部署活动学术专栏、活动学术管理系统前端界面
+	1、将academicadmin、academic文件夹，放置在tomcat下的webapps目录下
+	2、运行tomcat安装目录下bin文件夹中的startup.sh，或startup.bat文件
+
+
+前端界面
+	学术活动专栏代码地址：https://github.com/huanongdjy/academic.git
+	学术活动管理系统代码地址：https://github.com/huanongdjy/AcademicActivityManagement.git
+
+后台代码地址：https://github.com/huanongdjy/AcademicActivityManagement.git
