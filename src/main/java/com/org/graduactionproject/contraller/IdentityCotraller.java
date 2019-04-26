@@ -1,10 +1,13 @@
 package com.org.graduactionproject.contraller;
 
+import com.auth0.jwt.JWT;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.org.graduactionproject.commons.InfoPageJSONBean;
 import com.org.graduactionproject.domain.Identity;
+import com.org.graduactionproject.domain.User;
 import com.org.graduactionproject.service.IIdentityService;
+import com.org.graduactionproject.service.IUserService;
 import com.org.graduactionproject.token.Access;
 import com.org.graduactionproject.token.UserLoginToken;
 import net.sf.json.JSONObject;
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +31,10 @@ public class IdentityCotraller {
     @Autowired
     @Qualifier("identityService")
     IIdentityService identityService;
+
+    @Autowired
+    @Qualifier("userService")
+    IUserService userService;
 
     @RequestMapping(value = "/getIdentitysWithPage")
     @ResponseBody
@@ -132,6 +142,39 @@ public class IdentityCotraller {
             map.put("resultCode", 200);
             map.put("essays", essays);
         }
+        return map;
+    }
+
+
+    @RequestMapping(value = "/getAddUserIdentity")
+    @ResponseBody
+    @Transactional
+    @UserLoginToken
+    public Map<String, Object> getAddUserIdentity(HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("Authorization");
+        String author = JWT.decode(token).getAudience().get(0);
+        Map<String,Object> map = new HashedMap();
+        List<Identity> identities =  identityService.getIdentitys();
+        List<Identity> retIdentity = new ArrayList<>();
+        User user = userService.findUserByUserName(author);
+        String roles = user.getIdentity().getAccess();
+        List<String> strings = Arrays.asList(roles.substring(1,roles.length()-1).split(","));
+
+        for (Identity identity : identities){
+            boolean tmp = true;
+            String[] strings0 = identity.getAccess().substring(1,identity.getAccess().length()-1).split(",");
+            for(String str0 : strings0){
+                if(!strings.contains(str0)){
+                    tmp = false;
+                }
+            }
+            if (tmp){
+                retIdentity.add(identity);
+            }
+        }
+
+        map.put("identities", retIdentity);
+        map.put("resultCode", 200);
         return map;
     }
 }

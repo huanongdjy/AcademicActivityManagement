@@ -14,7 +14,7 @@ import java.util.Map;
 public interface AchievementMapper {
     @Select("<script>" +
             "select * from achievement where achievement_id = #{achievement_id}"
-            + "<when test='college_id!=0'>"
+            + "<when test='college_id!=null and college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -36,7 +36,7 @@ public interface AchievementMapper {
 
     @Select("<script>" +
             "select * from achievement where 1=1"
-             + "<when test='college_id!=0'>"
+             + "<when test='college_id!=null and college_id!=0'>"
              + "and college_id=#{college_id}"
              + "</when>"
              + "order by acquisitiondate"
@@ -52,7 +52,7 @@ public interface AchievementMapper {
 
     @Select("<script>" +
             "select * from achievement where title like CONCAT('%', #{title},'%')"
-            + "<when test='college_id!=0'>"
+            + "<when test='college_id!=null and college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -67,7 +67,7 @@ public interface AchievementMapper {
 
     @Select("<script>" +
             "select * from achievement where title like CONCAT('%', #{title},'%')"
-            + "<when test='college_id!=0'>"
+            + "<when test='college_id!=null and college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -129,7 +129,7 @@ public interface AchievementMapper {
 
     @Select("<script>" +
             "select COUNT(*) from achievement where time between #{begTime} and #{endTime}"
-            + "<when test='college_id!=0'>"
+            + "<when test='college_id!=null and college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
@@ -137,7 +137,7 @@ public interface AchievementMapper {
 
     @Select("<script>" +
             "select COUNT(*) from achievement where time between #{begTime} and #{endTime} and type_id=#{type_id}"
-            + "<when test='college_id!=0'>"
+            + "<when test='college_id!=null and college_id!=0'>"
             + "and college_id=#{college_id}"
             + "</when>"
             +"</script>")
