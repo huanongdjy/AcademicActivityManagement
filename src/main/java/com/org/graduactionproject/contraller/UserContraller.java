@@ -93,6 +93,7 @@ public class UserContraller {
     @RequestMapping(value = "/getUsers")
     @ResponseBody
     @UserLoginToken
+    @Access
     public InfoPageJSONBean getUsers(HttpServletRequest httpServletRequest, @RequestBody String data){
         JSONObject jsonObject = JSONObject.fromObject(data);
         int page = jsonObject.getInt("currentPage");
@@ -104,12 +105,20 @@ public class UserContraller {
 
         InfoPageJSONBean infoPageJSONBean = userService.getInfoPage(size, page);
         List<User> list = infoPageJSONBean.getPage().getList();
-        list = list.stream()
-                .filter(item -> item.getCollege_id() != 0)
-                .filter(item -> item.getCollege_id() == user.getCollege_id() )
-                .filter(item -> !item.getUsername().equals(username))
-                .collect(Collectors.toList());
-        infoPageJSONBean.getPage().setList(list);
+        if (user.getCollege_id() !=0) {
+            list = list.stream()
+                    .filter(item -> item.getCollege_id() != 0)
+                    .filter(item -> item.getCollege_id() == user.getCollege_id() )
+                    .filter(item -> !item.getUsername().equals(username))
+                    .collect(Collectors.toList());
+            infoPageJSONBean.getPage().setList(list);
+        }else{
+            list = list.stream()
+                    .filter(item -> item.getCollege_id() != 0)
+                    .filter(item -> !item.getUsername().equals(username))
+                    .collect(Collectors.toList());
+            infoPageJSONBean.getPage().setList(list);
+        }
         return infoPageJSONBean;
     }
 
